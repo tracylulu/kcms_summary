@@ -1,0 +1,862 @@
+kcms系统重构项目总结记录：
+
+http://10.63.32.225/kcmsgit/kcms.git
+
+kcms测试环境数据库：
+10.165.25.69
+3310
+tmskpidb
+tmskpi8dev
+L2j4H9_62Y
+
+
+1．	新KCMS-JAVA项目DB测试环境：
+应用名称：研发员工关键贡献管理
+Mysql版本：Mysql数据库(8.0)
+IP和端口：10.165.25.69 / 3310
+数据库名称： kcmsdbts
+数据库账号： h3ckcms
+数据库密码： gB*mvRHF*57b
+
+
+
+使用mybatisPlus+lombok+swagger，比较简洁会少些很多代码
+
+kcms框架说明：
+前后端分离：
+后端：
+
+springboot
+springmvc
+mybatisPlus：增加版Mybatis，只做增强不做改变，基础的数据库CRUD、分页等可以直接生成使用，避免了大量的重复低效代码
+lombok插件：可以让你的POJO代码特别简洁,减少了代码量提升效率
+mybatisPlus的代码自动生成插件：比mabatis的自动生成代码的插件更好用。
+swagger插件
+
+
+
+mybatisPlus参考文档：
+Mybatis 和 Mybatis Plus 的区别：
+https://blog.csdn.net/liuduke1/article/details/108246383
+mybatis-plus的使用 ------ 入门：
+https://www.jianshu.com/p/ceb1df475021
+mybatis-plus的使用 ------ 进阶：
+https://www.jianshu.com/p/a4d5d310daf8
+
+
+本周工作总结：
+4.19-4.23：
+输出软件开发和软件测试算法剖析文档，硬件开发和硬件测试算法剖析文档，输出kcms重构框架说明文档和框架模板。
+4.26-4.30：
+剖析数据库表结构，并对不合理的地方进行总结。对wucan最新修改的php代码进行阅读分析，并开发后端的接口。
+
+20210507：
+先用eos1.0.2的包。因为1.0.4的包集成了nacos，这个项目在eos那边还没有配置，所以用新的包报错
+先把 TokenInterceptor  InterceptorConfig  FirstFilter  SSOFilter这几个文件的注解先注释，先不用sso登录,不然每次写接口都得token验证。到时候可以参考lisheng的
+对数据库结构进行优化设计。
+20210508：
+
+团队得分，员工得分接口写好了，但都还没实现分页。stream流实现分页
+
+本周工作总结：
+5.6-5.8：
+讨论表结构设计，完成团队得分，员工得分两个页面的所有接口开发，并对接口进行测试优化等工作
+本周工作总结：
+5.10-5.14：
+完成登录功能的接口开发，并对软件开发中定时汇算的几个接口进行了开发验证
+本周工作总结：
+5.17-5.21：
+完成了软件开发个人模块的接口开发，包括总览页面，当季得分页面，开发得分，维护得分，评审得分，关键事件分，平台贡献得分等页面的接口开发和测试工作。
+本周工作总结：
+5.24-5.28：
+熟悉isoftV模型项目软件开发的汇算，和前端联调接口，并对前端反馈的接口进行修改和测试，完成申请补录，补录审核模块的接口开发
+
+5.29加班内容：
+和前端联调补录审核模块以及公告栏优化需求的接口。isoftV模型项目需求业务分析，数据库表结构修改，以及该部分代码编写。
+
+
+
+
+
+
+
+
+20210509：
+团队得分，员工得分页面接口已完成，传参到时候会加一个排序的参数，这个到时候得改下接口，员工得分中的特殊事件得分接口暂时不做。
+
+20210510：
+把定时计算软件开发得分的删除逻辑移到汇算成功后再删除，以免删除数据了但是汇算报异常了没有数据。
+ 
+20210513： 
+把汇算的逻辑都写完，可以验证下这块逻辑，验证的话可以先备份之前的外围系统相关表。
+注意点： idmsinfo_list 表中release字段改成release1.这个是关键字。
+		safetyinfo_list 表中release字段改成release1.这个是关键字。不然sql执行报错-------数据迁移时候注意下。
+ 
+确认下：weihu接口中的方法check_idms，php那块根据 idmsinfo_list中的属性Name_B  Name_C  如果这两个都为空的话，怎么算？这条数据排除？--------剔除
+idmsinfo_list中的数据：单号：202103111158  Name_B
+
+确认下：无效问题单基线子版本过滤条件，代码中是这样的if (mb_strpos(' '.$idms['BASELINE'].' ',$v) or mb_strpos(' '.$idms['BASELINE_1'].' ',$v)){---------确认了包含temp的就行了，不分前后。包含就行
+ 
+20210517：  
+修改13号备注标记的表结构。
+软件开发测试数据：
+SELECT * FROM isoft_project_list WHERE projectId='21EC82FF-4DC8-4508-9DBD-6324CB475F72'  
+怎么总天数58 ，Q1季度17天
+2021Q1季度：rx:0293
+A 70 B 80 C 0 D 100
+
+
+20210518：
+isearch有一个优化需求，等有时间了在做下，见chenpeng发的邮件。----------------------------------------中间抽时间做
+
+20210519：
+换成另外一种形式了，取chenpeng他们那边的表，利用开导工具导入到我们表中，获取到配置页面中显示出来。
+
+测试环境搜索:机械硬盘选型指导书V3.0  第一次很快，第二次很慢，也得看下，应该是json转换有问题，后台报错了。 测试环境有问题，正式环境目前没这个问题。
+at com.h3c.isearch.util.HttpUtil.sendPost(HttpUtil.java:78)
+com.alibaba.fastjson.JSONException: syntax error, pos 3, json : The upstream server is timing out
+这个报错可能是chenpeng那边相应数据超时的关系。
+
+
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+20210406：自动生成的代码数据库中是text的类型，生成的为string类型的，改数据库中的text为varchar？并设置长度。
+
+
+
+注：php使用unset()删除数组中某个单元(键)的方法。
+strtotime 方法：日期转换为时间戳 
+explode字符串拆分数组，implode数组拼接字符串
+str_replace ( mixed $search , mixed $replace , mixed $subject [, int &$count ] ) 该函数返回一个字符串或者数组。该字符串或数组是将subject中全部的search都被replace替换之后的结果。
+$User->where('id=5')->setInc('score',3); // 用户的积分加3    ->setInc('charge_score',-$add['score']);
+pHP时间戳函数获取指定日期的unix时间戳 strtotime('2012-12-7')
+array_slice()函数进行数组截取
+strtolower() 把所有字符转换为小写
+
+职位：开发					职位：测试	
+开发得分：                  测试执行得分：
+软件开发        			软件测试
+硬件开发					硬件测试
+
+职位：开发					职位：测试	
+维护得分：	                测试设计得分：
+软件开发维护得分			软件测试测试设计得分
+硬件开发维护得分 			硬件测试测试设计得分
+
+以下三项不区分职位：
+评审得分：
+关键事件分：
+平台贡献得分
+
+20210422：
+评估软件开发部分的工作量，5月底之前完成开发部分，包括前后端联调测试，6月底上线。
+下周正式开发，总计25人天。
+
+重新建表？只建软件开发相关的表？  TakeController中的
+public function take_json(){
+		$this->user_info();
+		$this->idms();
+		//$this->experience();
+	}
+	
+	public function take_excel(){
+		$this->isoft_pro();
+		$this->patent();
+	}
+	
+	
+还是用原来的数据库，原来的表，到时候有的表设计不合理再新建表
+	
+20210423：
+问题：
+下周和小马姐先梳理表结构，看看表的合理性，需要加啥字段，需要加哪些表等。	
+wucan帮忙讲解下TakeController。和git这些天提交的文件修改的大致内容。---再看下软件算法中的开发得分，维护得分，审计得分的算法，wucan进行了优化，把反复查数据库的方法提出去了。尽量不要在循环中查数据库，可以先查出来
+每天跑的定时任务有哪些，在什么地方看？涉及到算法的还有其他的吗？
+D:\kcms_project\01 需求阶段\04 定时任务   有文档，但是不具体。
+
+#每天同步数据脚本
+00 2 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/take/take_mysql
+00 3 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/take/take_oracle
+00 4 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/take/take_sqlserver
+00 0 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/take/take_json
+00 5 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/take/take_excel
+
+#数据计算脚本
+00 6 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/svn/get_design
+00 6 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/summary/total_summary
+00 7 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/summary/total_summary_test
+30 6 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/hardware/total_score_s
+30 7 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/hardware/total_score_test_s
+00 22 * * * /app/php/bin/php /app/apache/htdocs/thinkphp3/cli.php home/summary/dev_summary   这个是wucan测试软件开发单拿出来的定时，之前是在total_summary中的。后续还会放进去
+
+
+20210425：
+剖析数据库表结构，并对同步过来的表建一个中间表，类似于研发资产项目的deptInfoEos一样，目前只建和软件开发相关的即可、
+中间表用现在系统的表就行了，要建最终业务逻辑使用的表
+	
+20210430：
+已经把部门java代码模板修改了下提交到kcms的git库中了
+
+
+
+
+
+
+
+
+
+	
+	
+问题：
+1.软件开发的算法系统中算法介绍中有，其他几种（软件测试，硬件开发，硬件测试）的呢？
+2.想办法看出来php后端代码中有哪些接口，总结下。看看有什么php的可视化工具好显示出来。
+3.测试环境数据库连接信息。
+
+AdminController.class.php    	超级管理员模块功能
+ChargeController.class.php	    主管模块功能
+CloudController.class.php		这个模块具体的用处不是很清楚，没有总结
+EmployeeController.class.php	员工模块功能	
+HardwareController.class.php	硬件模块功能
+IndexController.class.php		登录，其他公共方法等模块功能 
+SummaryController.class.php     软件模块功能 
+SvnController.class.php			这个模块具体的用处不是很清楚，没有总结        软件测试是获取svn提交日志存到svn_list表中，然后操作这个表，硬件测试直接获取数据的excel，把数据写到新加的三张表中，然后处理逻辑
+
+每个模块涉及到的重要接口：
+--------------------------------------------------------------------------------
+SummaryController（软件分数算法都在这里面）：
+1.软件开发:（大概6个主要的接口）：
+季度总得分计算:
+SummaryController.class.php   中的方法： total_score
+涉及到的表： quarter_score 员工季度总得分表  employee_list 员工信息表 review_summary 评审得分统计表 idm_employee 软件开发问题单得分表
+add_score 关键事件得分表 project_summary 项目得分汇总表 platform_summary 平台贡献得分表
+
+开发得分：
+SummaryController.class.php   中的方法： dev_su,dev   dev_su中包装了dev。
+涉及到的表： project_su 项目数据汇总表  project_summary 项目得分汇总表  employee_list 员工信息表  isoft_project_list 项目信息表  isoft_contribution_list 项目人员贡献度  
+dptconfig_list 软件开发算法参数配置表  dptaveragescore_list 二级部门季度平均得分表  isoft_workschedule 工作日历表
+维护得分：
+SummaryController.class.php   中的方法： weihu
+涉及到的表： idm_employee 软件开发问题单得分表  employee_list 员工信息表 idmsinfo_list 问题单表  dptconfig_list  软件开发算法参数配置表
+
+评审得分：
+SummaryController.class.php   中的方法： audit  
+涉及到的表： review_summary 评审得分统计表  employee_list 员工信息表  reviewinfo_list 评审信息表 dptconfig_list 软件开发算法参数配置表 review_cloud_list 云产品评审信息表
+
+//云数软件得分计算
+SummaryController.class.php   中的方法： develop
+涉及到的表： project_summary 项目得分汇总表  isoft_project_cloud_list 项目信息表  employee_list 员工信息表
+--------------------------------------------------------------------------------
+2.软件测试（大概4个主要的接口）：
+季度总得分计算：
+SummaryController.class.php   中的方法： total_score_test  
+涉及到的表： 
+
+测试执行得分：
+SummaryController.class.php   中的方法： test_execute
+涉及到的表： execute_score 软件测试测试执行得分表 employee_list 员工信息表 idmsinfo_list 问题单表 dptconfig_softtest_list 软件测试算法参数配置表
+
+测试设计得分：
+SummaryController.class.php   中的方法： test_design 
+涉及到的表： design_list  design_score 测试设计得分表  employee_list 员工信息表 reviewinfo_list 评审信息表 dptconfig_softtest_list  软件测试算法参数配置表
+
+评审得分：
+SummaryController.class.php   中的方法： audit 
+涉及到的表：同软件开发
+--------------------------------------------------------------------------------
+HardwareController（硬件分数算法都在这里面）：
+3.硬件开发（大概5个主要的接口）:
+季度总得分计算：
+HardwareController.class.php  中的方法： total_score
+涉及到的表： quarter_score 员工季度总得分表  employee_list 员工信息表  review_summary 评审得分统计表  idm_hardware 问题单硬件得分表
+add_score 关键事件得分表  hcmm_summary 单板得分表  platform_summary  平台贡献得分表
+
+开发得分：
+详细设计总得分
+HardwareController.class.php  中的方法： hcmm
+
+PCB设计总得分
+HardwareController.class.php  中的方法：hcmm  后面的代码
+归档单板总得分
+HardwareController.class.php  中的方法：hcmm  后面的代码
+UT总得分
+HardwareController.class.php  中的方法：hcmm  后面的代码
+
+涉及到的表： hcmm_summary 单板得分表   hcmminfo_b_list HCMM-B板信息表  employee_list 员工信息表  dptconfig_hardware_list 硬件开发算法参数配置表
+isoft_workschedule 工作日历表  pdminfo_list PDM信息表
+
+维护得分：
+问题单总得分：
+待分析件总得分：
+生产质量问题处理总得分：
+HardwareController.class.php  中的方法： weihu  都在这里面
+涉及到的表： idm_hardware 问题单硬件得分表  employee_list 员工信息表  idmsinfo_list 问题单表 dptconfig_hardware_list 硬件开发算法参数配置表
+analyzeinfo_list 待分析件信息表  qmsinfo_list 生产质量问题QMS信息表
+
+硬件开发评审得分：
+HardwareController.class.php  中的方法： audit
+涉及到的表：  review_summary 评审得分统计表 employee_list 员工信息表  dptconfig_hardware_list 硬件开发算法参数配置表
+reviewinfo_list 评审信息表
+
+硬件开发平台贡献得分：
+HardwareController.class.php  中的方法： platform
+涉及到的表： platform_summary 平台贡献得分表  employee_list 员工信息表  experienceinfo_list 经验案例信息表  patentinfo_list 专利信息表  
+sharedocinfo_list 共享技术信息表  specinfo_list 规范表  cbbinfo_list  CBB视图信息表  ynfxinfo_list 疑难复现电子流信息表
+
+4.硬件测试（大概8个主要的接口）:
+季度总得分计算：
+HardwareController.class.php  中的方法： total_score_test
+涉及到的表： quarter_score 员工季度总得分表  employee_list 员工信息表  review_summary 评审得分统计表  idm_hardware 问题单硬件得分表
+add_score 关键事件得分表  hcmm_summary 单板得分表 lims_summary 专业实验汇总表  safety_summary 认证测试汇总表   platform_summary  平台贡献得分表
+
+硬件测试维护得分（ 页面中测试执行得分模块--问题单总得分）：
+HardwareController.class.php  中的方法： weihu_test
+涉及到的表： idm_hardware 问题单硬件得分表 employee_list 员工信息表  idmsinfo_list 问题单表  dptconfig_hardwaretest_list 硬件测试算法参数表
+
+硬件测试得分（ 页面中测试执行得分模块--硬件测试总得分，硬件设计审查得分）：
+HardwareController.class.php  中的方法： hcmm_test
+涉及到的表： hcmminfo_b_list HCMM-B板信息表  hcmm_summary 单板得分表
+
+测试设计得分（页面中测试设计得分模块）：
+HardwareController.class.php  中的方法： hardware_design
+涉及到的表： design_hardware_score 硬件测试设计表  employee_list 员工信息表  hardware_test_tool   hardware_test_script   hardware_test_example
+
+专业实验得分（ 页面中测试执行得分模块--专业试验总得分）：
+HardwareController.class.php  中的方法： lims
+涉及到的表： lims_summary 专业实验汇总表  employee_list 员工信息表  limsinfo_list  LIMS测试信息表
+
+认证测试得分（ 页面中测试执行得分模块--认证测试总得分）：
+HardwareController.class.php  中的方法： safetyinfo
+涉及到的表： safety_summary 认证测试汇总表  employee_list 员工信息表  safetyinfo_list  安规认证信息表
+
+注：（页面中测试执行得分模块--UT得分）
+
+
+硬件测试评审得分：
+HardwareController.class.php  中的方法： audit
+涉及到的表： 同硬件开发
+
+硬件测试平台贡献得分：
+HardwareController.class.php  中的方法： platform
+涉及到的表： 同硬件开发
+--------------------------------------------------------------------------------
+IndexController（大概9个主要的接口）：
+用户信息接口：
+IndexController.class.php  中的方法： user_info
+注：返回的参数类型可以看kcms接口文档中的第一个
+涉及到的表： employee_list 员工信息表 dptmanager_list 部门领导表  department_list 部门列表  admin_list  管理员列表
+
+登录接口：
+IndexController.class.php  中的方法： login
+涉及到的表： employee_list 员工信息表
+
+登出接口：
+IndexController.class.php  中的方法： logout
+涉及到的表：不涉及
+
+获取时间交集接口：（公共的方法，硬件软件的controller中也有，到时候看用哪个）
+IndexController.class.php  中的方法： get_worktime
+涉及到的表： isoft_workschedule  工作日历表
+
+获取四级部门接口：
+IndexController.class.php  中的方法： get_dpt
+涉及到的表：
+
+获取多个三级部门下的四级部门接口：
+IndexController.class.php  中的方法： get_dpts
+涉及到的表： department_list  部门列表
+
+获取account：
+IndexController.class.php  中的方法： get_account
+涉及到的表： employee_list 员工信息表
+
+获取通知
+IndexController.class.php  中的方法： notice
+涉及到的表： notice_list 系统通知表
+
+人员登录信息统计
+IndexController.class.php  中的方法： login_summary
+涉及到的表： employee_list 员工信息表  login_summary 系统登陆统计表
+
+注：问了wucan，就是我在看indexcontroller中的代码，发现有和软件硬件对应的controller中的方法，比如audit，weihu，dev_su dev total_score，这些他说都是废弃掉的，以硬件软件中的为准。
+
+--------------------------------------------------------------------------------
+AdminController（大概24个主要的接口）
+算法参数设置页面：
+二级部门参数设置接口
+AdminController（）.class.php  中的方法： config_reset
+涉及到的表： dptconfig_list 软件开发算法参数配置表  dptconfig_hardware_list 硬件开发算法参数配置表  
+dptconfig_softtest_list 软件测试算法参数配置表  dptconfig_hardwaretest_list 硬件测试算法参数表
+
+config参数检测
+AdminController（）.class.php  中的方法： config_check
+涉及到的表： 不涉及
+
+部门结构与权限配置页面：
+//部门树状结构
+public function department_list()
+涉及到的表： department_list 部门列表  dptmanager_list 部门领导表
+
+//部门新增
+public function department_add()
+涉及到的表： department_list  部门列表
+
+//部门删除（树状结构）
+public function department_delete()
+涉及到的表： department_list  部门列表
+
+//部门主管配置（树状结构）
+public function dpt_manager_set()
+涉及到的表： department_list 部门列表  dptmanager_list 部门领导表  employee_list 员工信息表
+
+人员信息配置页面：
+//人员信息配置接口
+    public function employee_set()
+涉及到的表： employee_list	员工信息表  department_list  部门列表
+//人员信息配置导入
+    public function employee_load()
+涉及到的表： employee_list 员工信息表  department_list  部门列表	 
+
+关键事件导入页面：
+public function add_score_admin()
+涉及到的表： add_score  关键事件得分表
+
+public function add_score()
+涉及到的表： employee_list  员工信息表   add_score  关键事件得分表
+
+补录参数设置页面：
+//关键事件分选项列表
+    public function add_score_list()
+涉及到的表： add_score_select  关键事件选项表	 
+	
+//新增关键事件分选项
+    public function add_score_select()
+涉及到的表： department_list 部门列表  add_score_select 关键事件选项表
+
+//删除关键事件选项
+    public function add_score_select_delete()
+涉及到的表： add_score_select 关键事件选项表
+
+超级管理员功能页面——反馈人员列表
+public function feedback_list()	
+涉及到的表： feedback 系统问题反馈表   employee_list  员工信息表
+
+public function feedback_status()
+涉及到的表： feedback 系统问题反馈表
+
+
+超级管理员功能页面——登录人员信息列表
+public function login_summary_list()
+涉及到的表： login_summary 系统登陆统计表   employee_list  员工信息表 
+
+超级管理员功能页面——领导补录记录
+public function charge_score_list()
+涉及到的表： charge_score 特殊事件得分表  employee_list  员工信息表
+
+超级管理员功能页面——申请补录记录
+public function add_score_audit_list()
+涉及到的表： add_score_audit 关键事件审核表  add_score_select 关键事件选项表  employee_list 员工信息表
+
+超级管理员功能页面——测试设计信息
+//测试设计得分列表
+    public function design_score()
+涉及到的表：  design_list   employee_list  员工信息表
+	
+超级管理员功能页面——管理员列表
+public function admin_list()
+涉及到的表： admin_list 管理员列表  employee_list  员工信息表
+
+超级管理员功能页面——特殊员工列表
+//特殊岗位人员表
+    public function special()
+涉及到的表： employee_list  员工信息表
+
+超级管理员功能页面——全量导出
+//导出所有数据
+    public function export_all()
+涉及到的表： quarter_score 员工季度总得分表   employee_list  员工信息表
+	
+超级管理员功能页面——公告编辑
+//编辑通知
+    public function notice()
+涉及到的表：  notice_list 系统通知表
+
+公共接口：
+查询人员身份信息：
+protected function check_person()
+涉及到的表： admin_list 管理员列表
+
+注：还剩下这两个接口感觉没用上，应该个部门结构与权限配置页面这个页面有关系
+ //部门主管
+    public function manager_set()
+//部门层级配置
+    public function department_set()
+
+--------------------------------------------------------------------------------
+ChargeController（大概10个主要的接口）
+我的团队--团队得分页面：
+//业务部绩效
+    public function department_list()
+涉及到的表： quarter_score 员工季度总得分表   employee_list  员工信息表
+	
+我的团队--员工得分页面：
+//员工绩效
+    public function employee_list()
+涉及到的表： quarter_score 员工季度总得分表   employee_list  员工信息表
+
+//特殊事件-领导加分个人列表
+    public function add_list()
+涉及到的表： charge_score 特殊事件得分表
+
+//特殊事件-领导加分
+    public function add()
+涉及到的表： employee_list 员工信息表 charge_score 特殊事件得分表 quarter_score  员工季度总得分表
+
+//特殊事件-删除
+public function add_delete()
+涉及到的表： employee_list 员工信息表 charge_score 特殊事件得分表 quarter_score  员工季度总得分表
+
+我的团队--团队看板页面：
+//看板
+public function signboard()
+涉及到的表： department_list 部门列表  quarter_score 员工季度总得分表   employee_list  员工信息表
+
+protected $signboard_field = array()
+涉及到的表： 不涉及
+
+考勤匹配模块页面：
+//分数匹配列表
+    public function score_check()
+涉及到的表：  quarter_score 员工季度总得分表   employee_list  员工信息表
+
+公共接口：
+查询人员身份信息：
+protected function check_person()
+涉及到的表： admin_list 管理员列表
+
+public function check_time($time){)-----------------没看
+涉及到的表： 不涉及
+
+注：还剩下这个接口感觉没用上，这个是老的看板接口，现在用的是新的
+//看板
+    public function signboard_old()
+
+--------------------------------------------------------------------------------
+EmployeeController（大概31个主要的接口）
+我的得分--总览页面：
+//总览
+    public function overview()
+涉及到的表： quarter_score 员工季度总得分表   employee_list  员工信息表
+	
+我的得分--当季得分页面：
+//个人得分
+    public function total_score()
+涉及到的表： employee_list 员工信息表 project_summary 项目得分汇总表 idm_employee 软件开发问题单得分表 hcmm_summary 单板得分表 
+idm_hardware 问题单硬件得分表 safety_summary 认证测试汇总表 lims_summary 专业实验汇总表 design_score 测试设计得分表 execute_score 软件测试测试执行得分表
+ review_summary 评审得分统计表 add_score 关键事件得分表 platform_summary  平台贡献得分表 quarter_score 员工季度总得分表
+
+开发职位：
+我的得分--开发得分页面：	
+软件开发和硬件开发：
+//个人开发得分查询接口
+    public function emp_project_list()
+涉及到的表： employee_list 员工信息表  project_summary 项目得分汇总表  hcmm_summary  单板得分表
+
+点击项目名称显示的信息
+//个人项目得分详情
+    public function emp_project_detail()
+涉及到的表： isoft_project_list 项目信息表 hcmminfo_b_list  HCMM-B板信息表 hcmm_summary  单板得分表
+	
+我的得分--维护得分页面：	
+软件开发和硬件开发：	
+//个人维护得分查询接口
+    public function emp_defend()
+涉及到的表： employee_list 项目信息表  idm_employee 软件开发问题单得分表  idm_hardware 问题单硬件得分表
+
+//个人维护得分详情查询接口
+    public function emp_defend_list()	
+涉及到的表： employee_list 项目信息表 analyzeinfo_list 待分析件信息表  qmsinfo_list  生产质量问题QMS信息表
+	
+测试职位：
+我的得分--测试执行得分页面：
+软件测试：
+//个人测试执行得分
+    public function execute_score()
+涉及到的表： employee_list 项目信息表  execute_score  软件测试测试执行得分表
+
+//个人测试执行得分列表
+    public function execute_score_list()
+涉及到的表： employee_list 项目信息表 idmsinfo_list 问题单表
+
+硬件测试：
+//测试执行得分
+    public function hardware_execute()
+涉及到的表： employee_list 项目信息表  idm_hardware 问题单硬件得分表   hcmm_summary  单板得分表 
+ lims_summary 专业实验汇总表  safety_summary 认证测试汇总表  quarter_score  员工季度总得分表
+
+//硬件测试测试执行得分详情
+    public function execute_score_detail()
+涉及到的表： employee_list 项目信息表   hcmminfo_b_list	HCMM-B板信息表  limsinfo_list LIMS测试信息表  safetyinfo_list 安规认证信息表  
+	
+我的得分--测试设计得分页面：
+软件测试：	
+//测试设计得分
+    public function design_score()
+涉及到的表： employee_list  项目信息表   design_score  测试设计得分表
+硬件测试：
+//硬件测试设计得分
+    public function hardware_design()
+涉及到的表： employee_list  项目信息表  design_hardware_score  硬件测试设计表
+
+软件测试没有看见可以下拉展示详情，硬件测试详情没有接口？	
+	
+	
+我的得分--评审得分页面：
+//个人评审得分查询接口
+    public function emp_audit()
+涉及到的表： employee_list 员工信息表  review_summary  评审得分统计表
+	
+//个人评审得分详情查询接口
+    public function emp_audit_list()
+涉及到的表： employee_list 员工信息表  reviewinfo_list 评审信息表 dptconfig_list 软件开发算法参数配置表 reviewinfo_cloud_list 云产品评审信息表 dptconfig_hardware_list 硬件开发算法参数配置表
+	
+我的得分--关键事件分页面:
+//个人额外加减分查询接口
+    public function add_score_list()
+涉及到的表： employee_list 员工信息表 add_score 关键事件得分表
+
+//个人额外加减分详情
+    public function add_score_detail()	
+涉及到的表： employee_list 员工信息表 add_score 关键事件得分表
+
+我的得分--平台贡献得分页面：
+//平台贡献得分
+    public function platform()
+涉及到的表： employee_list 员工信息表  platform_summary 平台贡献得分表
+
+//平台贡献得分详细列表
+    public function platform_list()	
+涉及到的表： employee_list 员工信息表  experienceinfo_list 经验案例信息表  patentinfo_list 专利信息表  
+sharedocinfo_list 共享技术信息表  specinfo_list 规范表  cbbinfo_list  CBB视图信息表  ynfxinfo_list 疑难复现电子流信息表
+	
+点我反馈弹出框页面：
+//反馈意见
+    public function feedback()
+涉及到的表： employee_list 员工信息表  feedback 系统问题反馈表
+
+申请补录模块--申请补录页面：
+申请记录列表：
+//关键事件分个人页面列表
+    public function add_score_reply_list()
+涉及到的表： add_score_select 关键事件选项表 employee_list 员工信息表  add_score_audit  关键事件审核表
+
+//申请记录中--催签
+    public function urging()
+涉及到的表：  employee_list 员工信息表  add_score_audit  关键事件审核表
+
+关键事件分列表汇总：
+//个人额外加减分查询接口
+    public function add_score_list()
+涉及到的表：和这个相同。我的得分--关键事件分页面:个人额外加减分查询接口
+
+提交申请按钮：	
+//个人关键事件得分申报
+    public function add_score_reply()	
+涉及到的表：  employee_list 员工信息表  add_score_audit  关键事件审核表
+
+//补录申请中--关键事件分选项列表
+    public function add_score_select()
+涉及到的表： add_score_select 关键事件选项表 employee_list 员工信息表  dptmanager_list  部门领导表
+
+
+申请补录模块--补录审核页面：	
+//个人关键事件得分审核功能
+    public function add_score_audit()
+涉及到的表：  add_score_select 关键事件选项表 employee_list 员工信息表  add_score_audit  关键事件审核表   add_score  关键事件得分表
+	
+展示列表
+public function add_score_audit_list()	
+涉及到的表： add_score_select 关键事件选项表 employee_list 员工信息表  add_score_audit  关键事件审核表
+
+公共接口：
+查询人员身份信息：
+protected function check_person()
+涉及到的表： admin_list 管理员列表
+
+//查询部门总人数
+protected function get_count()
+涉及到的表： employee_list 员工信息表
+
+//查询排名
+protected function get_rank($type,$quarter){}
+涉及到的表： employee_list 员工信息表   quarter_score  员工季度总得分表
+
+protected function get_idms($type,$user,$start,$end,$method)
+涉及到的表： idmsinfo_list  问题单表
+
+public function check_idms($idms)
+涉及到的表： employee_list  员工信息表 dptconfig_list  软件开发算法参数配置表
+
+这几个文件大概97个接口，加上几个时间的公共接口，大概100个。
+
+--------------------------------------------------------------------------------
+CloudController
+ public function develop($quarter){
+ 同SummaryController中的云数软件得分计算
+ 
+ 
+
+--------------------------------------------------------------------------------
+SvnController
+public function design(){
+涉及到的表： design_list  svn_list
+其他的方法没太看懂，好像是和操作svn的命令有关系
+
+
+
+--------------------------------------------------------------------------------
+20210304:
+本周工作总结：了解kcms系统，熟悉相关需求文档，看kcms后端代码，并总结后端接口等工作。
+
+小马姐，关于下个月kcms重构的时间评估，就先按照你说的一个季度吧，我这边对工作量的评估也不太熟练，也咨询了下wucan，他说一个季度是ok的，
+这两天系统的看了下kcms的系统介绍和算法的介绍，主要的难点复杂点在于分数的计算。
+我这边也在总结php后端代码涉及到的接口，按照系统功能点详细的总结了一下，还没总结完，接口挺多的，主要是这些模块：
+AdminController.class.php    	超级管理员模块功能
+ChargeController.class.php	    主管模块功能
+CloudController.class.php		
+EmployeeController.class.php	员工模块功能	
+HardwareController.class.php	硬件模块功能
+IndexController.class.php		登录，其他公共方法等模块功能 
+SummaryController.class.php     软件模块功能 
+SvnController.class.php
+
+下周准备总结完接口后，在一个个研读弄懂接口的具体内容，涉及的逻辑以及和数据库的交互等。
+再熟悉下数据库的一些表结构等，知道各个表是干什么的。
+php不懂，读起来可能有些吃力，到时候有什么不懂的我再问wucan。
+
+20210312:
+本周工作总结：熟悉kcms系统后端代码中8个controller的业务功能，并理清总结系统中涉及到的复杂的算法介绍，以及输出系统中大约100个接口的详细文档介绍。
+
+--------------------------------------------------------------------------------
+20210315：
+看代码遇到的问题：
+1.系统算法介绍中的举例，其中算项目总分，Q1X= 0.5*50 + 0.25*100 + 0.15*100 + 0.1*80 = 73分 
+这个50是怎么来的？
+
+  $A =pow(2,(-($v['ATDI']/(float)$v['ActualScale'])/(float)$config['prj_ATaverageQuarter']))*100;
+  
+2.我看软件的summarycontroller中算时间交际的有几个方法，是不是系统中都用的和这个方法get_worktime ，因为我看有暂停的参数了。---已看代码，都是用本controller中的时间交集代码的
+wucan回复的：
+时间交集  --软件开发的项目得分 是调用这个方法    50是验收得分
+算法这一块，挺复杂的，如果有不明白的，可以问wangjunze   是他主要负责软件人员的算法
+
+3.软件开发维护得分计算的代码中为什么maintail函数中参数配置默认是1*参数？-----------是的，因为他都是循环每条处理的，所以数量默认都是1？
+4.if (count($insert_list) > 2000){
+            for ($i = 0; $i < count($insert_list)/1000;$i++){
+                $list_a = array_slice($insert_list,$i*1000,1000);
+                M('review_summary')->addAll($list_a);
+            }
+        }else{
+            M('review_summary')->addAll($insert_list);
+   
+看到了类似很多这种批量操作的代码，为啥要拆分着添加？
+ 
+5.//云数软件得分计算
+    public function develop($quarter)
+这个得分是啥？看着像是软件开发的得分
+6.时间季度的那个算的问题到时候抽成公共方法。
+7.软件测试中的测试执行和测试设计的分是怎么算的？看代码能看出来，有没有文档？
+
+今天把软件开发测试的代码都看完了，明天看硬件的开发测试。
+
+--------------------------------------------------------------------------------
+20210316：
+1.HardwareController硬件代码中的451行怎么理解，当季完成的项目rx应该就为1，后续就没有乘了是吧？后面减去的得分如何理解？
+514行同理，555
+2.硬件开发维护的代码中96行，扣除回归不通过的为什么减去了2遍？
+3.硬件测试中的测试执行和测试设计的分是怎么算的？看代码能看出来，有没有文档？
+4.硬件测试设计得分（页面中测试设计得分模块）：方法 hardware_design  代码不全？硬件测试计算当季得分方法没有维护得分？
+
+5.IndexController.class.php  中的方法： user_info这个接口中，type字段1234分别表示员工，主管，管理员，超级管理员？
+
+--------------------------------------------------------------------------------
+20210317：
+1.
+我的团队--员工得分页面：
+//员工绩效
+    public function employee_list()
+这个方法中的传参和61行的方法看的不是很明白。
+
+2.我的团队--团队得分页面：
+//业务部绩效
+    public function department_list()
+这个方法看的不是很明白
+3.//看板
+public function signboard()
+没太看明白，都是在根据条件拼装sql？
+
+4.接口文档不全，看了下只有几个接口的说明。
+
+5.我的得分--平台贡献得分页面：
+//平台贡献得分详细列表
+    public function platform_list()	
+这个接口疑难复现用的是这个表cbbinfo_list  CBB视图信息表 不是这个ynfxinfo_list 疑难复现电子流信息表？ 
+
+--------------------------------------------------------------------------------
+20210318：
+小马姐，这几天总结了下后端接口大概有100个左右。细看了接口，并对系统哪个页面对应哪个接口，以及他们对应的数据库表宗总结记录了下，见附件
+另外在这过程中遇到了一些问题，我也总结下，后续还得请wucan他们帮忙解答下。
+
+--------------------------------------------------------------------------------
+20210319：
+总结的文档用excel输出下，涉及到系统功能页面的，和算法相关的。
+
+1.SvnController中的有些方法没太看懂，好像是和操作svn命令有关系。
+
+20210304:
+本周工作总结：了解kcms系统和代码以及数据库，输出详细的excel接口表格汇总，并对后端代码不清楚的地方输出相应的相关问题汇总文档。
+
+
+--------------------------------------------------------------------------------
+下周把总结的问题发出来，并开始总结sql，把sql都写出来
+
+--------------------------------------------------------------------------------
+20210325：
+从svn地址吧iam的代码下下来，看看，说是先做场地的，在iam中加入菜单栏开发
+
+--------------------------------------------------------------------------------
+20210326：
+本周工作总结：了解熟悉iam系统和代码，并看需求设计到site，lab，pod等和iam相关的接口文档和一些其他相关的参考文档。
+
+
+--------------------------------------------------------------------------------
+20210401：
+
+现在资产的登录 就是 前端先走一个资产这边的 /ssoLogin 接口 
+后台先返回一个拼接好的sso地址 前端直接跳转 跳到sso登录成功之后
+sso 带着一个参数再跳转回来 然后前端带着这个参数再请求SSOLogin 
+后台再返回那些数据 现在大概是这么个流程 
+
+
+
+    git config --global user.name "cYS1425"
+    git config --global user.email "YS.chenlulu@h3c.com"
+
+20210415:
+复看php代码，记录有什么不动的地方。并总结软件开发的算法逻辑，软件开发6月底上线。
+
+
+
+
+
+
+ 

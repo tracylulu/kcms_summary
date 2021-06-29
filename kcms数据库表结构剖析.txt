@@ -1,0 +1,1482 @@
+	软	add_score   				关键事件得分表
+		add_score_audit				关键事件审核表
+		add_score_select			关键事件选项表              status字段现在数据库为TINYINT ，建议改为INT类型存储。    MySQL数据库中tinyint类型字段对应JAVA的boolean类型,true和false。数据库这样设置不常见
+同	软	admin_list					管理员列表				    数据库缺少自增id  表数据是从excel中同步过来的--------------没有增加自增id，该表原来有id。
+同	软	analyzeinfo_list			待分析件信息表			    数据库有自增id  表数据是从sqlserver中同步过来的    				        										trouble字段现在是text类型------------text字段暂时没改，太长了，可以先改成varchar（2000）到时候同步这表的时候再截取2000个字符存起来就行了。
+同	软	cbbinfo_list				CBB视图信息表			    数据库有自增id  表数据是从oracle中同步过来的
+		charge_score				特殊事件得分表				
+同	软	department_list				部门列表				    数据库缺少自增id  表数据是后续会写接口同步过来的		
+		design_hardware_score		硬件测试设计表				数据库缺少自增id  example_num tool_num store_num这三个字段涉及不合理，应该由float改成int。
+	软	design_list					测试设计列表
+	软	design_score				测试设计得分表				数据库缺少自增id
+	软	dptaveragescore_list		二级部门季度平均得分表
+		dptconfig_hardwaretest_list 硬件测试算法参数表			数据库缺少自增id    dptcode建议设置成varchar类型，现在是int
+		dptconfig_hardware_list		硬件开发算法参数配置表		数据库缺少自增id	dptcode建议设置成varchar类型，现在是int
+	软	dptconfig_list				软件开发算法参数配置表		数据库自增id设置的有问题
+		dptconfig_softtest_list		软件测试算法参数配置表		dptcode建议设置成varchar类型，现在是int
+同	软	dptmanager_list				部门领导表					数据库缺少自增id  表数据是后续会写接口同步过来的	--------------没有增加自增id，该表原来有id。
+同	软	employee_list				员工信息表					数据库缺少自增id  但它又工号作为主键id   表数据是后续会写接口同步过来的	  -------------wucan建议不加主键，维持这样，因为这个id用的地方很多
+同		employee_resign_list		离职员工信息表				数据库缺少自增id  表数据是后续会写接口同步过来的   没有用到这个表？	 		-------------暂时没用到
+	软	execute_score				软件测试测试执行得分表		数据库缺少自增id
+同	软	experienceinfo_list			经验案例信息表				数据库有自增id  表数据是后续会写接口同步过来的   takecontroller中看出来的，待确定-------------xml同步过来的
+		feedback					系统问题反馈表				content字段现在是text类型，改为varchar。  time字段现在是int，建议改成datetime
+		hardware_test_example		硬件测试测试用例			数据库缺少自增id  表数据是从excel中同步过来的--------------没有增加自增id，该表原来有id。
+		hardware_test_script		硬件测试自动化工具脚本		数据库缺少自增id  表数据是从excel中同步过来的--------------没有增加自增id，该表原来有id。
+		hardware_test_tool			硬件测试器材建库			数据库缺少自增id  表数据是从excel中同步过来的--------------没有增加自增id，该表原来有id。
+		hcmminfo_b_list				HCMM-B板信息表				数据库有自增id  表数据是从sqlserver中同步过来的
+		hcmminfo_r_list				HCMM-R板信息表				数据库有自增id  没有用到这个表？-------------暂时没用到
+		hcmm_summary				单板得分表
+同	软	idmsinfo_list				问题单备份表				数据库缺少自增id  表数据是后续会写接口同步过来的	Summery DefectUrl这两个字段类型由text改成varchar（1000）--------------没有增加自增id   release字段改成release1.这个是关键字。
+	软	idm_employee				软件开发问题单得分表		数据库缺少自增id------------------------------------------------------------在原来的表中加一个字段：seconddptcode。不然，软件维护算分存储比较麻烦
+		idm_hardware				问题单硬件得分表			数据库缺少自增id
+同	软	isoft_contribution_list		项目人员贡献度				数据库缺少自增id  表数据是从sqlserver中同步过来的   projectId字段类型由text改成varchar(200)
+同	软	isoft_project_cloud_list	项目信息表					数据库缺少自增id  表数据是从mysql中同步过来的
+同	软	isoft_project_list			项目信息表					数据库缺少自增id  表数据是从sqlserver中同步过来的   projectId Url 字段类型由text改成varchar(200)   varchar(1000)
+		isoft_project_new_list									数据库缺少自增id  没有用到这个表？-------------暂时没用到。备份用的表
+同	软	isoft_workschedule			工作日历表					数据库缺少自增id
+		limsinfo_list				LIMS测试信息表				数据库有自增id  表数据是从sqlserver中同步过来的		ProductType ConfigNum  ExpType字段类型由text改成varchar(200)  
+		lims_summary				专业实验汇总表				数据库缺少自增id
+		login_summary				系统登陆统计表
+	软	notice_list					系统通知表					notice字段类型由text改成varchar（1000）    
+同	软	patentinfo_list				专利信息表					数据库有自增id  表数据是从excel中同步过来的   patentName字段类型由text改成varchar(200)   
+同	软	pdminfo_list				PDM信息表					数据库有自增id  表数据是从oracle中同步过来的
+	软	platform_summary			平台贡献得分表				数据库缺少自增id
+	软	project_su					项目数据汇总表				数据库缺少自增id
+	软	project_summary				项目得分汇总表				数据库缺少自增id	
+同	软	qmsinfo_list				生产质量问题QMS信息表		数据库有自增id  表数据是从mysql中同步过来的
+	软	quarter_score				员工季度总得分表			数据库缺少自增id	
+		reviewinfo_bak_list			评审信息备份表				数据库自增id设置的有问题， 没有用到这个表？-------------暂时没用到。备份用的表
+同	软	reviewinfo_cloud_list		云产品评审信息表			代码中用的时这个表review_cloud_list，和数据库对不上？这个表怎么来的？---------------用的是reviewinfo_cloud_list这个表，wucan后来改了
+同	软	reviewinfo_list				评审信息表					数据库自增id设置的有问题   表数据是从mysql中同步过来的
+	软	review_summary				评审得分统计表				数据库缺少自增id------------------------------------------------------------在原来的表中加一个字段：domainid。不然，软件评审算分存储比较麻烦
+		safetyinfo_list				安规认证信息表				数据库缺少自增id  表数据是从oracle中同步过来的		CERTIFY_MODEL CERTIFY_KIND  CERTIFY_TYPE 字段类型由text改成varchar(1000)    
+release字段改成release1.这个是关键字。
+		safety_summary				认证测试汇总表				数据库缺少自增id
+同	软	sharedocinfo_list			共享技术信息表				数据库有自增id  这个表怎么来的？		DocumentSubType字段类型由text改成varchar（2000）    -------------xml同步过来的
+同	软	specinfo_list				规范表						数据库有自增id  表数据是从oracle中同步过来的    GFMC GFZYRY GFBZSJ 字段类型由text改成varchar（200） varchar（200）  varchar（2000） 
+	软	svn_list												数据库缺少自增id  表数据是操作svn的日志提取过来的 
+		white_list					白名单						数据库缺少自增id  没有用到这个表？	-------------暂时没用到
+同	软	ynfxinfo_list				疑难复现电子流信息表		数据库有自增id  表数据是从oracle中同步过来的
+
+
+
+1.建议用decimal类型代替float类型，前者更加精确，后者相加减可能会产生比较小的误差。我看现在的数据库中分数字段有的是用decimal有的是用float，没有形成统一标准。代码中可以用decimal转成double进行运算操作。
+
+2.对同步过来的表建一个最终表，目前只建和软件开发相关的表即可。软件开发大概涉及到33张表，总共58张表。
+中间表用现在系统的表就行了，要建最终业务逻辑使用的表里面可以加上同步时间，同步状态等字段，最终表的创建考虑到上面的剖析情况。
+小马姐会重新申请数据库，不在现在的测试环境数据库动表。
+20210506：举例：中间表用这个ynfxinfo_list_sync，sync结尾的，最终表用这个ynfxinfo_list，原来数据库中的，因为写的接口用的都是这个表，这样改动最少。
+20210517;不需要加中间表等，在原来的表上加上同步标识和同步时间的字段即可。
+
+
+
+
+3.需要增加的表：操作日志表   邮件记录表   判断员工职类常量表  isoft_check状态表？  计算逻辑规则表？------看能不能抽成静态常量？--不好抽
+
+
+增加自增主键id
+alter table design_hardware_score add id INT;
+alter table design_hardware_score change id id int not null auto_increment primary key;
+
+
+alter table feedback add TIME1 DATETIME
+UPDATE reviewinfo_list SET PSPG_TIME='2021-05-06 00:00:00'
+
+UPDATE analyzeinfo_list SET trouble='2021-05-06，重置，到时候同步数据的时候截取2000个字符存储'
+
+
+注：同步数据的时候，注意把原来的text类型的字段截取现在数据库指定的varchar字符长度然后存储。
+
+--------------------------------------------------------------------------------------------
+idmsinfo_list中新加字段：ProjectID   
+isoft_project_list中新加字段：ProPhase  项目阶段   ProQuaterWork  项目当季工作量
+
+创建表3， 同时拷贝表1的数据和结构到表3
+CREATE TABLE table3 SELECT * FROM table1
+
+最终表加上的列：
+ALTER TABLE ynfxinfo_list_final ADD COLUMN `sync_status` VARCHAR(50) NULL DEFAULT NULL COMMENT '同步状态标识';
+ALTER TABLE ynfxinfo_list_final ADD COLUMN `sync_time` DATETIME DEFAULT NULL COMMENT '同步时间标识';
+
+20210507：
+和小马姐讨论了，不需要中间表，直接在同步表中加上sync_status  sync_time这两个字段就行了
+上述表中所有的“同”都加上了。
+
+20210517：
+litongxin反馈：
+safetyinfo_list  release字段这个是关键字。存储有问题。
+已改成release1存储。
+
+reviewinfo_list这个表里面的字段类型都是非空的，PSSH_NAME 、PSSH_TIME 、PSPG_NAME 、PSPG_TIME 这几个都是环节的签名和签名时间。数据集成过来可以为空值
+已改这几个字段，改成可以为空值存储。
+
+chenyuexiu反馈：
+experienceinfo_list  中字段ChineseName 的长度不够用，之前是20
+已改成50。
+
+20210518:
+为idmsinfo_list加上了2个索引，提高查询效率
+ALTER TABLE `idmsinfo_list`
+	ADD INDEX `Index 3` (`DefectModifiedTime`),
+	ADD INDEX `Index 4` (`CurrentNode`);
+	
+litongxin反馈：
+1、
+表名：analyzeinfo_list
+字段：trouble、fix_difficulty、fillname_19、filltime_19、fillname_7、filltime_7
+说明：原表数据中所有字段都是不是非空，这些事暂时有遇到的字段
+2、
+         表名：isoft_workschedule
+         说明：没有sync_status  和  sync_time  字段
+3、
+       表名：pdminfo_list
+       字段：H3PCBLEVELNUM（这个暂时没改，数据库存的是int）、PDT
+       说明：暂时遇到的字段；没有sync_status  和  sync_time  字段
+4、
+         表名：safetyinfo_list
+         字段：SigningTime72、SigningTime71，SigningTime73，SigningTime74
+说明：原表数据中所有字段都是不是非空，这些事暂时有遇到的字段
+5、
+         表名：specinfo_list
+         字段：FBTIME、DEPT1、GFZYRY、
+说明：原表数据中所有字段都是不是非空，这些事暂时有遇到的字段
+6、
+         表名：ynfxinfo_list
+         字段：TOTALTIMES、USERID_06B、ENDTIME_06B
+说明：原表数据中所有字段都是不是非空，这些事暂时有遇到的字段
+已改这几个字段，改成可以为空值存储。
+
+isoft_project_cloud_list ，这个表中这个字段的长度你可以先改大点嘛   no_accepted_code 
+已从10改成了50
+
+1、	开发测试云
+         表名：isoft_project_cloud_list
+         字段：di_density、progress_deviation
+         说明：progress_deviation字段长度需要修改成50
+2、	CBB接口
+表名：cbbinfo_list
+字段：nh3c_ReasonArchAgain、nh3c_KeyComp、nh3c_CbbLevel、ActualRelDate、H3SecondLevelDept……
+说明：只有revision、item_id非空，其他的都是可空
+3、	CMM
+表名：reviewinfo_list
+字段：account、
+4、	HCMM(待确认)
+表名：hcmminfo_r_list   、hcmminfo_b_list
+         说明：没有sync_status  和  sync_time  字段；原视图定义的类型都是可以为空，因为字段较多，建议都修改成可以为空
+1.2.3已改，4待确认，这个是硬件开发的呀---也改下。---这两个表加字段我这边改，为空的操作litongxin那边操作。
+
+
+20210519：
+chenyuexiu反馈：
+ALTER TABLE `kcmsdbts`.`patentinfo_list` 
+CHANGE COLUMN `dptname` `dptname` VARCHAR(50) NULL COMMENT '所属业务部门' ,
+CHANGE COLUMN `applicant` `applicant` VARCHAR(50) NULL COMMENT '申请人' ; 
+改成允许为null
+
+litongxin反馈：
+表名：safetyinfo_list
+说明：sync_status  和  sync_time  字段 --------已加字段。
+
+20210520：
+为department_list 加上了1个索引，提高查询效率
+ALTER TABLE `department_list` ADD INDEX `Index 2` (`subdptcode`);
+增加新的表：project_quarter_work_list当季当量数据表
+litongxin反馈：
+limsinfo_list   增加同步字段-----已增加
+
+chenyuexiu反馈：
+patentinfo_list 表中：applyDate  patentName  patentType thirddptname   改成了允许为null
+
+litongxin反馈：
+反馈了很多，见文档。
+
+20210521：
+
+
+20210524：
+修改表的引擎为innodb，已改的表：add_score  add_score_audit
+ALTER TABLE add_score ENGINE=InnoDB; ------------------------------所有的表都要改
+测试的是applyController中的方法：addScoreAudit   还是不生效---已生效
+全局的事务回滚已生效，日志也会滚，和lisheng他们那个项目一样。
+Controller方法中后续都得加上这个注解，这样日志记录更加详细点。--------------------------todo
+@OperLog(operModelName="外围系统-isoft",operContent="获取Comware产品特性审计结果")
+
+和玥秀一起把后端的代码重新部署到eos平台上了，前端直接访问下面的swagger就可以调试了。
+http://api.eos-ts.h3c.com/kcms-ts/V1.0/swagger/swagger-ui.html
+
+
+20210525：
+软件开发isoftV模型项目汇算涉及到的新增和修改的表：
+新贡献度视图dbo.V_impl_Contribution  不加，用之前的即可
+修改表：
+isoft_project_list 表中加字段  CloseTime   ProjectSerialNum
+ALTER TABLE `isoft_project_list` ADD COLUMN `CloseTime` DATETIME NULL DEFAULT NULL COMMENT '实际关闭时间（完结项目计算）' AFTER `EndTime`;
+ALTER TABLE `isoft_project_list` ADD COLUMN `ProjectSerialNum` VARCHAR(200) NULL DEFAULT NULL COMMENT '项目流水号（与IDMS对应）' AFTER `TC`;
+	
+idmsinfo_list 表加字段  ProjectSerialNum  isNew  UpdateDate
+ALTER TABLE `idmsinfo_list` ADD COLUMN `ProjectSerialNum` VARCHAR(200) NULL DEFAULT NULL COMMENT '项目流水号（与Isoft对应）' AFTER `IdmsType`;
+ALTER TABLE `idmsinfo_list` ADD COLUMN `isNew` VARCHAR(5) NULL DEFAULT NULL COMMENT '是否为新单' AFTER `ProjectSerialNum`;
+ALTER TABLE `idmsinfo_list` ADD COLUMN `UpdateDate` DATETIME NULL DEFAULT NULL COMMENT '更新日期' AFTER `isNew`;
+
+project_summary  加字段  countDate
+ALTER TABLE `project_summary` ADD COLUMN `countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期' AFTER `type`;
+
+新建表：  
+project_acceptance_problems_list项目验收问题单视图表
+project_summary_v  v模型的汇算中间表，到时候把Sa_count字段值赋值给project_summary的Sa_count字段,还是用之前的这个表计算
+project_problems_di 项目总问题单DI汇算表
+
+20210526：
+先在软件开发的配置表dptconfig_list中自己添加配置下这几个字段。
+项目工作量系数          v_pro_work
+系数A=系统测试DI系数	v_systestDI_a
+员工ST提单DI系数		v_subQuestDI
+员工ST解单DI系数		v_solveQuestDI
+系数B=验收测试解单DI系数 v_checktestDI_b
+
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_pro_work` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '项目工作量系数' AFTER `prj_Auditprefix`;
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_systestDI_a` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '系统测试DI系数A' AFTER `v_pro_work`;
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_subQuestDI` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '员工ST提单DI系数' AFTER `v_systestDI_a`;
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_solveQuestDI` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '员工ST解单DI系数' AFTER `v_subQuestDI`;
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_checktestDI_b` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '验收测试解单DI系数B' AFTER `v_solveQuestDI`;
+先给定初始值为0.1，后续在调整。
+
+当季得分中的开发得分接口修改下，改成显示汇总的，不显示带个的开发得分条目信息，但是鉴定得分中的NA不好累加，小马姐去确认下
+
+
+20210527：
+总览页面慢，加了索引
+ALTER TABLE `employee_list`  DROP INDEX `account_2`,ADD INDEX `account_2` (`seconddptcode`),ADD INDEX `Index 4` (`postType`);
+当季得分页面慢，加索引
+ALTER TABLE `project_summary` ADD INDEX `Index 2` (`account`),ADD INDEX `Index 3` (`quarter`);
+ALTER TABLE `idm_employee`ADD INDEX `Index 2` (`account`),ADD INDEX `Index 3` (`quarter`);
+ALTER TABLE `review_summary` ADD INDEX `Index 2` (`account`),ADD INDEX `Index 3` (`quarter`);
+ALTER TABLE `add_score` ADD INDEX `Index 2` (`quarter`);
+ALTER TABLE `platform_summary` ADD INDEX `Index 3` (`quarter`);
+
+前后端联调重新修改的接口：
+当季得分页面中开发得分详情接口修改（之前返回的是开发的分的明细，现在不用了返回总和，但是坚定得分那边显示NA待确认），
+维护得分详情修改（现在改为6个筛选条件来显示问题单信息，传参的type对应：普通提单为1，普通修改为2，普通定位为3，普通审核为4，同步修改为5，同步审核为6），
+关键事件得分详情修改（现在改为传参不需要project了 直接返回所有数据），
+评审得分详情没有改，已经和建超标记好返回的字段内容是怎么对应的了
+优化了总览，当季得分的页面性能。请再次观察下。
+	
+20210528：
+公告栏功能增加需求：
+增加2个接口，一张表 ：notice_read_record 各个员工最新公告阅读记录表	
+
+维护得分详情type=3展示有问题。已修改
+评审得分详情接口   发现问题项传1，未发现问题项传0
+关键事件得分详情接口  排序了
+平台贡献得分详情去掉了分页（type：1经验案例，2共享技术，3规范，4专利，5cbb,6疑难复现）
+
+算法：前缀和
+
+20210529：
+isoftV模型项目软件开发代码编写
+
+project_problems_di 项目总问题单DI汇算表  新加一个字段：'验收测试总DI'
+ALTER TABLE `project_problems_di`  ADD COLUMN `ProCheckDI` INT NOT NULL DEFAULT '0' COMMENT '项目系统验证测试总DI' AFTER `ProQuestDI`;
+
+project_summary 表新加了2个字段
+ALTER TABLE `project_summary`
+ADD COLUMN `projectType` VARCHAR(20) NULL DEFAULT NULL COMMENT 'V模型项目还是普通项目' AFTER `type`,
+ADD COLUMN `accountWork` DECIMAL(10,2) NULL DEFAULT NULL COMMENT '员工当季工作量：当季总工作量(项目当量表)*当季员工贡献度百分比' AFTER `projectType`;
+
+新建了project_su_v代替了之前的project_summary_v表
+
+定时必须先删除当前季度的数据，之前把原来的删除的代码置后了，违背了之前软件开发的逻辑，因为跨季度的时候Q2取的之前Q1的得分之和，不删除就去的是Q2+Q1的了
+所以测试之前一定要备份删除表的数据   ----------周一待确认   dev方法的251行--------先不置后删除了
+
+isoftV模型项目中的Q1X要和业务确认
+
+加班内容：
+和前端联调补录审核模块以及公告栏优化需求的接口。isoftV模型项目需求业务分析，数据库表结构修改，以及该部分代码编写。
+
+//全局事务设置后，代码报错没有删除成功（回滚成功），但是没有日志记录（lisheng说正常），先不记录了， 在异常拦截器处理那块加下（只能记录日志错误，无法记录方法等）
+我的controller方法中都要加上@OperLog(operModelName="测试使用",operContent="测试使用")注解，不然不记录日志
+
+
+20210531：
+联调免密登录接口，熟悉xxjob定时任务
+
+20210601：
+联调sso登录接口，配置软件开发汇算的controller为定时任务
+
+维护得分定时汇算---weihu方法-----已测试。-----涉及到的汇算表idm_employee加一个字段：汇算日期：countDate
+ALTER TABLE `idm_employee` ADD COLUMN `countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期' AFTER `normalLocationNum`;
+把历史数据删除了：
+
+评审页面中的展示详情的接口慢，评审得分详情列表中分数保留2位小数。
+reviewinfo_list  评审信息表
+ALTER TABLE `reviewinfo_list` ADD INDEX `Index 2` (`account`), ADD INDEX `Index 3` (`finishdate`);
+----------已处理
+
+reviewinfo_middle_list  litongxin说要建的中间表  和reviewinfo_list表结构一样-----已加
+
+20210602:
+评审得分定时汇算---audit方法-----已测试。-----涉及到的汇算表review_summary加一个字段：汇算日期：countDate
+ALTER TABLE `review_summary` ADD COLUMN `countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期' AFTER `domainid`;
+云数的评审有问题。z23641-----有点问题，已发邮件------最终确定评审得分列表中改的公式换成定时汇算中的
+
+
+
+云数软件得分定时汇算---develop方法-----有点问题，已发邮件------原来系统自愈了？
+先把历史数据删除了：DELETE FROM  isoft_project_cloud_list WHERE sync_time IS  NULL 
+崔晓会 03029  z23641  a20273
+
+团队得分，员工扥分接口要修改--已修改，季度字段传单值，加上了排序的字段
+//按排名进行排序(默认按照部门排名字段进行排序)(业务部1	总分/人数2	维护得分3	开发得分4	评审得分5	关键事件分6	  平台贡献分7  业务部内排名0	城市8 	特殊岗位占比9)
+//按排名进行排序(默认按照部门排名字段进行排序)(姓名1  工号2 总分3 开发得分4 维护得分5	  评审得分6	关键事件分7	  平台贡献分8  业务部内排名0	城市9  类别10)
+
+每个方法todo的验证权限要补充----已完成
+
+
+20210603:
+云数评审得分展示列表那块的分数计算公式修改。
+
+前后端联调团队得分页面接口
+
+软件开发得分定时汇算---devsu方法-----有点问题，下面的字段为null，我这边报空指针异常
+
+
+得等tongxin那边这几张表数据同步完了才能测试，历史数据有问题
+删除历史数据：
+DELETE FROM  isoft_project_list WHERE sync_time IS  NULL 
+DELETE FROM  isoft_contribution_list WHERE sync_time IS  NULL 
+DELETE FROM  isoft_workschedule WHERE sync_time IS  NULL 
+
+devsu 软件开发得分汇算定时：
+isoft_project_list：不能传空的字段：
+ProjectId
+Seconddptcode
+EndTime
+Difficult
+ActualScale
+PlanScale
+PCBType
+PlanProRate
+PlanManHours
+StartTime
+PlanEndTime
+SecondRecoverTime
+FirstRecoverTime
+FirstPauseTime
+SecondPauseTime
+Atdi
+ScheduleForAll
+AppraiseEva
+AuditScore   ------------这个字段tongxin反馈压根就没有传过来。咱们库中都是null，但是之前的测试库中是有数据的
+ProjectName
+
+
+
+贡献度表 isoft_contribution_list:
+Contributevalue
+Person
+
+devForModelV  V模型项目软件开发得分汇算定时：
+v模型加上下面的：
+isoft_project_list：
+ProjectSerialNum
+
+当季当量数据表 project_quarter_work_list：
+QuarterStr
+ProQuarWork
+
+idms表 idmsinfo_list：
+ProjectSerialNum
+OdcSeverity
+DefectNO
+SubmitBy
+NameB
+
+项目验收问题单视图表 project_acceptance_problems_list：
+project_id
+DefectNo
+
+
+develop 云数开发得分汇算定时：
+涉及到的表：
+isoft_project_cloud_list 项目信息表
+不能为空的字段：
+AcceptedCode
+NoAcceptedCode
+DiDensity
+ProgressDeviation
+Contribution
+ProjectName
+ProjectId
+JobNumber
+
+audit评审得分汇算定时：
+涉及到的表：
+reviewinfo_list 评审信息表
+不能为空的字段：
+Account
+Ordinarynum
+Ordinarynum
+Tipnum
+Totalnum
+Totaltime
+Totaldi
+
+涉及到的表：
+review_cloud_list 云产品评审信息表
+不能为空的字段：
+JobNumber
+ReviewCount
+
+
+weihu维护得分汇算定时：
+涉及到的表：
+idmsinfo_list 问题单表 
+不能为空的字段：
+IdmsType
+SubmitBy
+ODC_Severity
+Locationer
+Name_B
+Name_C
+Summery
+DefectNO
+BASELINE
+BASELINE_1
+ProjectSerialNum
+
+20210604：
+时区问题修改，之前时间对不上，现在ok了
+前后端调试员工得分页面接口ok
+
+软件开发得分定时汇算---total_score方法-----测试ok
+weihu  audit develop 都测试ok。用这个人账号验证：zhouxin 23641
+
+
+定时任务部署corn表达式到eos平台上------todo
+软件开发定时 dev                       
+软件开发V模型项目定时 devForModelV
+云数软件开发定时 develop   凌晨0点
+评审得分汇算定时 audit		凌晨0点30分
+维护得分汇算定时 weihu		凌晨1点
+当季得分汇算定时 total_score  凌晨1点30分
+
+
+
+quarter_score这个表下面这些字段设置成可以为空，到时候和玥秀说一声
+ALTER TABLE `quarter_score` CHANGE COLUMN `firstdptcode` `firstdptcode` VARCHAR(50) NULL DEFAULT NULL;
+seconddptcode   thirddptcode  currentdptcode  fivedptcode  firstdpt  seconddpt  thirddpt  currentdpt  fivedpt  special
+
+本周工作汇总： 
+5.31-6.4：
+和前端联调sso登录接口，配置软件开发汇算定时任务到eos平台并测试，统计修改的表结构，和前端联调接口后对业务代码进行修改。
+
+20210607：
+前端开发得分页面展示有问题。zhouxin 23641  开发得分 187.13 ？？？-----调整好了，现在鉴定得分那块，传-1或者其他值
+
+下周把上面测好的定时，发到eos部署上运行看看。测试dev，和v模型的，小马姐发了v模型的数据excel------todo
+l14937 这个人登录，维护得分展示列表数量那对不上。得看下。--------重新执行了定时，是ok的
+
+4个定时任务部署corn表达式到eos平台上------已部署完毕
+
+litongxin总结的数据库表非空的文档，得和小马姐他们讨论下，不然我这没法测试开发的定时汇算
+
+
+20210608：
+ALTER TABLE `reviewinfo_list`
+	CHANGE COLUMN `totaltime` `totaltime` DECIMAL(10,5) NOT NULL COMMENT '投入人时' AFTER `reviewid`,
+	CHANGE COLUMN `criticalnum` `criticalnum` INT NOT NULL COMMENT '严重问题个数' AFTER `totaltime`,
+	CHANGE COLUMN `sync_time` `sync_time` DATETIME NULL DEFAULT NULL COMMENT '同步时间标识' AFTER `sync_status`;
+ALTER TABLE `reviewinfo_list`
+	ALTER `ordinarynum` DROP DEFAULT,
+	ALTER `tipnum` DROP DEFAULT,
+	ALTER `totalnum` DROP DEFAULT,
+	ALTER `totaldi` DROP DEFAULT,
+	ALTER `finishdate` DROP DEFAULT,
+	ALTER `SCALE` DROP DEFAULT,
+	ALTER `PERSONLIABLE` DROP DEFAULT,
+	ALTER `PSSH_NAME` DROP DEFAULT,
+	ALTER `PSSH_TIME` DROP DEFAULT,
+	ALTER `PSPG_NAME` DROP DEFAULT,
+	ALTER `PSPG_TIME` DROP DEFAULT;
+ALTER TABLE `reviewinfo_list`
+	CHANGE COLUMN `ordinarynum` `ordinarynum` INT NOT NULL COMMENT '一般问题个数' AFTER `criticalnum`,
+	CHANGE COLUMN `tipnum` `tipnum` INT NOT NULL COMMENT '提示问题个数' AFTER `ordinarynum`,
+	CHANGE COLUMN `totalnum` `totalnum` INT NOT NULL COMMENT '评审问题总数' AFTER `tipnum`,
+	CHANGE COLUMN `totaldi` `totaldi` DECIMAL(10,5) NOT NULL COMMENT '评审总DI' AFTER `totalnum`,
+	CHANGE COLUMN `finishdate` `finishdate` DATETIME NOT NULL COMMENT '评审结束时间' AFTER `totaldi`,
+	CHANGE COLUMN `SCALE` `SCALE` VARCHAR(10) NOT NULL COMMENT '规模' COLLATE 'utf8_general_ci' AFTER `reviewurl`,
+	CHANGE COLUMN `PERSONLIABLE` `PERSONLIABLE` VARCHAR(50) NOT NULL COMMENT '评审任务责任人 ID' COLLATE 'utf8_general_ci' AFTER `SCALE`,
+	CHANGE COLUMN `PSSH_NAME` `PSSH_NAME` VARCHAR(50) NOT NULL COMMENT '20环节责任人 签名人ID' AFTER `PERSONLIABLE`,
+	CHANGE COLUMN `PSSH_TIME` `PSSH_TIME` DATETIME NOT NULL COMMENT '20环节责任人 签名时间' AFTER `PSSH_NAME`,
+	CHANGE COLUMN `PSPG_NAME` `PSPG_NAME` VARCHAR(50) NOT NULL COMMENT '60评审评估环节签名人' AFTER `PSSH_TIME`,
+	CHANGE COLUMN `PSPG_TIME` `PSPG_TIME` DATETIME NOT NULL COMMENT '60评审评估环节签名时间' AFTER `PSPG_NAME`;
+
+前后端联调修改代码，修改开发定时汇算的代码，跑通了dev定时，得验证数据
+如何验证？现在推过来的数据当季的项目可以验证，跨季度的怎么验证，因为跨季度的项目project_su表中存储了之前季度的数据，这个也要从生产推过来？--跑下Q1的定时
+
+20210609：
+开发得分汇算测试：-------已经部署到eos上了
+1.测试用例： z07556 
+49BDC36D-AC8E-4419-8C74-C884131CE1C5
+4.1-6.30
+开始时间：5.24   计划结束时间：8.12    项目总时长：58天    当季开发天数：12天（截止到现在时间6.9）
+a:70 b: 80 c:0 d:100
+cx:	12.954  rx：0.207   Q1X:65.0   S1X:56.01  SA：36.41
+
+2.测试用例： w23636 
+FCE76BAC-5DC3-4187-9F50-307F322F6BA3
+4.1-6.30
+开始时间：5.26   结束时间：6.7    项目总时长：9天    当季开发天数：9天（截止到现在时间6.9）
+a:100 b: 100 c:0 d:100
+cx:	0.7  rx：1.0   Q1X:85.0   S1X:19.59  SA：16.65
+
+3.测试用例： z11722   跨季度的
+1BDB570D-FABA-4F6D-AE78-68E820629BDD
+
+写平台贡献的定时任务：-----------本地还没有测试。数据问题
+platform_summary表加了3个字段：
+ALTER TABLE `platform_summary`  ADD COLUMN `countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期' AFTER `cbb_num`;
+ALTER TABLE `platform_summary` ADD COLUMN `domainid` VARCHAR(50) NULL DEFAULT NULL COMMENT '域账号' AFTER `countDate`,
+	ADD COLUMN `userId` VARCHAR(50) NULL DEFAULT NULL COMMENT '工号' AFTER `domainid`;
+
+isoft_workschedule表加索引：
+	ALTER TABLE `isoft_workschedule` ADD INDEX `Index 2` (`WorkDay`), ADD INDEX `Index 3` (`DayType`);
+	
+	
+experienceinfo_list 表中字段不为空：
+ApplicatEndTime 
+patentinfo_list 表中字段不为空：
+applyDate 
+sharedocinfo_list表中字段不为空：
+LastModifyDate
+specinfo_list表中字段不为空：
+SSTIME
+cbbinfo_list表中字段不为空：
+ActualRelDate  RespParty
+ynfxinfo_list表中字段不为空：
+ENDTIME_06B  USERID_06B  STATUS
+
+20210610:
+质量与运营管理部  50043804  在软件开发配置表汇总没有，但是idmslist表中有，导致报错
+
+projectId   projectName   proType  seconddptcode  PCBType  PlanScale  ActualScale  PlanManHours  PlanProRate  StartTime  PlanEndTime  EndTime  FirstPauseTime  FirstRecoverTime  SecondPauseTime  SecondRecoverTime
+ATDI  ScheduleForAll  Difficult  AuditScore  AppraiseEva
+
+V模型项目，wangjunze给的excel测试：
+018DAC7F-92D3-11EB-862C-FA163E762A0D
+当季工作量：1000
+验收得分A:94.934  
+进度得分B:80 
+鉴定得分C:100  
+审计得分D：90
+开发质量得分Q1X:91.467
+个人提单总DI：6
+个人解单总DI：6
+个人验收测试解单总DI：0
+项目系统测试总DI：6
+项目系统验证测试总DI：1.5
+个人当季开发得分：907920.79--->91.88
+验收扣分：25.33
+进度扣分：50.00
+鉴定扣分：0.00
+审计扣分：10.00
+项目满分：100.00
+贡献度：100.00
+项目总得分：91.47
+员工当季工作量：当季总工作量(项目当量表)*当季员工贡献度百分比：1000.00
+
+
+project_su_v  v模型的汇算中间表
+"1"	"wangjunze测试"	"018DAC7F-92D3-11EB-862C-FA163E762A0D"	"91.47"	"2021Q2"	"50043804"	"1000.00"
+project_problems_di 项目总问题单DI汇算表
+"1"	"20210529001"	"018DAC7F-92D3-11EB-862C-FA163E762A0D"	"wangjunze测试"	"wangjunze 16576"	"6.00"	"6.00"	"0.00"	"6.00"	"1.50"	"2021-06-10 16:07:27"
+project_summary  项目得分汇总表
+"82732"	"2021Q2"	"wangjunze测试"	"1.000"	"018DAC7F-92D3-11EB-862C-FA163E762A0D"	"wangjunze 16576"	"907920.79"	"25.33"	"50.00"	"0.00"	"10.00"	"1.00"	"100.00"	"91.47"	"normal"	"V模型项目"	"1000.00"	\N
+
+
+修改project_problems_di的下面字段的类型由int改成decimal，因为di算出来有小数的
+ALTER TABLE `project_problems_di`
+	CHANGE COLUMN `SubQuestDI` `SubQuestDI` DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '个人提单总DI' AFTER `account`,
+	CHANGE COLUMN `SolveQuestDI` `SolveQuestDI` DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '个人解单总DI' AFTER `SubQuestDI`,
+	CHANGE COLUMN `CheckSolveQDI` `CheckSolveQDI` DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '个人验收测试解单总DI' AFTER `SolveQuestDI`,
+	CHANGE COLUMN `ProQuestDI` `ProQuestDI` DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '项目系统测试总DI' AFTER `CheckSolveQDI`,
+	CHANGE COLUMN `ProCheckDI` `ProCheckDI` DECIMAL(10,2) NOT NULL DEFAULT 0 COMMENT '项目系统验证测试总DI' AFTER `ProQuestDI`;
+
+
+平台贡献定时跑通了，明天部署到eos
+平台贡献页面数量去的不对  w02137
+
+20210611：
+平台贡献汇算部署到eos平台了。
+处理禅道上的bug。
+V模型项目跨季度非第一季度汇算已算在excel中，数据算出来公式有点问题。自己补充了第一季度的历史汇算数据
+开发得分，维护得分上游数据不为空的约定ok。其他的得分汇算（云数开发得分，评审得分，v模型得分，平台贡献得分）也要约定。
+问题：isoft_project_list  中的 ATDI  ScheduleForAll两个字段上游数据约定，之前null改成0换成改成None，tongxin那边报错了？下周关注下
+2021Q1和2021Q2季度的都定时任务都已经同步了。
+
+
+本周工作汇总：
+6.7-6.11：
+编写平台贡献的定时任务并测试部署，前后端联调测试接口处理禅道上的bug，对业务给的V模型本季度项目数据进行汇算分析。
+
+
+20210615：
+当季当量数据表：
+ALTER TABLE `project_quarter_work_list`
+	CHANGE COLUMN `quarter_str` `quarter_str` VARCHAR(50) NOT NULL COMMENT '季度' AFTER `project_id`,
+	CHANGE COLUMN `pro_quar_work` `pro_quar_work` DECIMAL(38,1) NOT NULL COMMENT '当季工作量（当量）' AFTER `quarter_str`;
+
+项目验收问题单视图表：
+ALTER TABLE `project_acceptance_problems_list`
+	CHANGE COLUMN `defect_no` `defect_no` VARCHAR(50) NOT NULL COMMENT '问题单号' AFTER `project_id`;
+
+ProjectSerialNum  流水号这个非空的设置，得等到有数据过来的时候在弄，涉及到isoft和idms两个表	
+	
+	
+	
+UAT看情况吧，如果后期业务介入测试，是建议SIT测试结束通过后再发布UAT
+前期准备上UAT的时候，可以发个版本，后面UAT不用发的跟SIT一样频繁	
+
+20210616:	
+V模型项目，wangjunze给的excel测试：	
+A4949AE9-0426-4F1E-BE08-A086187B07BE   跨季度项目非第一季度：
+验收得分A:95.76 
+进度得分B:100 
+鉴定得分C:100  
+审计得分D：100
+开发质量得分Q1X:97.88
+当季工作量：1100	
+当季项目总得分：135.55
+项目系统测试总DI：30
+项目系统验证测试总DI：30
+个人提单总DI：wangjunze:0  yanglan:30
+个人解单总DI：wangjunze:0  yanglan:0
+个人验收测试解单总DI：wangjunze:0  yanglan:0	
+
+wangjunze:
+个人当季开发得分：17148.52---> 102.19
+验收扣分：23.32
+进度扣分：0.00
+鉴定扣分：0.00
+审计扣分：0.00
+项目满分：110.00
+贡献度：80.00
+员工当季工作量：当季总工作量(项目当量表)*当季员工贡献度百分比：880.00
+
+yanglan：
+个人当季开发得分：3335.68---> 3.66
+验收扣分：23.32
+进度扣分：0.00
+鉴定扣分：0.00
+审计扣分：0.00
+项目满分：110.00
+贡献度：20.00
+员工当季工作量：当季总工作量(项目当量表)*当季员工贡献度百分比：220.00
+	
+注：按照公式算出来的结果会受设置的参数值有关系，目前几个参数设置的都是0.1，
+发现下面2个值算出来很大：
+项目截至当日的得分Bx = (项目截至当日总工作量*参数【项目工作量系数】- 系统测试总DI*系数A-系统验收测试总DI*系数B)*质量得分
+员工Cx截至当日项目实际总得分Sx = Bx *Rx+  [(个人提单的系统测试总DI值*提单系数 + 个人解单（系统测试单）总DI值*解单系数)*系数A +个人验收测试解单总DI*系数B] *质量得分
+	
+	
+20210618：
+修改了下V模型汇算中质量得分，安装百分比算。重新汇算出来数据。
+
+修改下定时时间，得在tongxin，yuexiu那个同步之后，玥秀的是2掉之后，tongxin的是1点之后。
+统计下各个定时任务的执行时间
+普通项目开发得分定时汇算：		凌晨2:30          	执行时间：1分11秒左右
+云数开发得分定时汇算：			凌晨3:30		  	执行时间：10秒之内
+维护得分定时汇算：				凌晨4:15			执行时间：1分20秒左右
+评审得分定时汇算：				凌晨3:45			执行时间：30秒左右
+平台贡献得分定时汇算：			凌晨4:00			执行时间：30秒左右
+当季得分定时汇算：				每2小时执行一次		执行时间：30秒左右
+V模型项目开发得分定时汇算：		凌晨3:00			执行时间：待定，应该也是很快的。
+
+和ruifang说下只测试2021年的数据，2020的数据报错不用管，到时候数据迁移的时候在看看。
+
+本周工作汇总：	
+6.15-6.18:
+前后端联调测试接口处理禅道上的bug，对业务给的V模型跨季度项目非第一季度项目数据进行汇算分析。修改了各个定时的运行时间并汇总，和测试人员讨论分析测试出来的问题。
+
+20210619：
+加班内容：V模型项目第三种场景“跨季度第一季度”模拟数据试算，新的移植规模逻辑实现、禅道现有BUG优化修改测试。 —— 陈路路
+1.
+把数据库中的这几个字段改成不能为空，和tongxin说一声，上游数据那块得改下，为空的话用0代替，和玥秀说一声。-------------done
+ALTER TABLE `isoft_project_list`
+	CHANGE COLUMN `PlanNewScale` `PlanNewScale` DECIMAL(10,3) NOT NULL COMMENT '估计新增规模' AFTER `FourthOrg`,
+	CHANGE COLUMN `PlanMoveScale` `PlanMoveScale` DECIMAL(10,3) NOT NULL COMMENT '估计移植规模' AFTER `PlanNewScale`,
+	CHANGE COLUMN `FactNewScale` `FactNewScale` DECIMAL(10,3) NOT NULL COMMENT '实际新增规模' AFTER `PlanMoveScale`,
+	CHANGE COLUMN `FactMoveScale` `FactMoveScale` DECIMAL(10,3) NOT NULL COMMENT '实际移植规模' AFTER `FactNewScale`;	
+	
+	
+	SELECT * FROM isoft_project_list  WHERE  PlanNewScale=0 and PlanMoveScale=0 and FactNewScale=0 AND  FactMoveScale=0
+	如果数据库中的数据这四个字段都是0的话，公式就有问题，因为会以0作为分母，程序会报错。目前的处理方式是过滤这四个字段都是0的这条数据，得和wangjunze说一声。--------代码逻辑已完成，得让wangjunze看下数据。---------todo
+	改完后的开发得分汇算已抛弃，没有报错。-------已和wangjunze确认，这条项目数据过滤掉------done
+2.	
+V模型项目第三种场景“跨季度第一季度”模拟数据试算:
+V模型项目，wangjunze给的excel测试：	
+B45EE8DB-5D2E-4385-8017-BA779AFBA523   跨季度项目第一季度：
+验收得分A:70
+进度得分B:80 
+鉴定得分C:0  
+审计得分D：100
+开发质量得分Q1X:65
+当季工作量：500	
+当季项目总得分：32.5
+项目系统测试总DI：0
+项目系统验证测试总DI：0
+个人提单总DI：wangjunze:0  yanglan:0
+个人解单总DI：wangjunze:0  yanglan:0
+个人验收测试解单总DI：wangjunze:0  yanglan:0	
+
+wangjunze:
+个人当季开发得分：6.5
+验收扣分：75
+进度扣分：25
+鉴定扣分：NA
+审计扣分：0.00
+项目满分：50.00
+贡献度：20.00
+员工当季工作量：当季总工作量(项目当量表)*当季员工贡献度百分比：100.00
+
+yanglan：
+个人当季开发得分：26
+验收扣分：75
+进度扣分：25
+鉴定扣分：NA
+审计扣分：0.00
+项目满分：50.00
+贡献度：80.00
+员工当季工作量：当季总工作量(项目当量表)*当季员工贡献度百分比：400.00
+
+3.处理禅道上的bug。
+
+
+问题：
+SELECT * FROM employee_list WHERE  id='05269'
+这个人登录现在职类为null，之前是软件开发，玥秀同步人员表的问题，少了很多数据，而且很多人员的职类都是null--------玥秀把数据恢复过来了，周一讨论反写postType字段。---------todo
+
+
+把2021Q1，Q2季度的数据定时任务刷了一遍。---------------done
+
+
+20210621：
+sit环境配置定任务并执行。
+112	V模型项目开发得分汇算定时任务	BEAN：devForModelVJobHandler	0 0 3 * * ?	陈路路	STOP	
+111	平台贡献得分汇算定时任务	BEAN：platformJobHandler	0 0 4 * * ?	陈路路	RUNNING	
+110	开发得分汇算定时任务	BEAN：devJobHandler	0 30 2 * * ?	陈路路	RUNNING	
+109	当季得分汇算定时任务	BEAN：totalScoreJobHandler	0 0 0/2 * * ?	陈路路	RUNNING	
+108	维护得分汇算定时任务	BEAN：weihuJobHandler	0 15 4 * * ?	陈路路	RUNNING	
+107	云数开发得分汇算定时任务	BEAN：developJobHandler	0 30 3 * * ?	陈路路	RUNNING	
+106	评审得分汇算定时任务	BEAN：auditJobHandler	0 45 3 * * ?	陈路路	RUNNING	
+
+玥秀那边执行定时，tongxin那边执行定时，我这边部署代码（直接执行流水线就行了），执行汇算定时，涉及到我这边建的中间表都没有数据（post_type_constant需要玥秀同步下），下午讨论下
+
+wangjunze反馈的问题：
+1.
+B7B2073F-E8DB-41B9-9AD4-6D9DE1AC6BBB
+"【临时特性】【鄂州顺丰机场】需求：请1020V产品适配Centos系统
+此项目计分错误，0.01K的项目得了一千多分，员工工号：19775"
+分析：
+这个项目
+PlanNewScale=0.001  PlanMoveScale=0  FactNewScale=0.001   FactMoveScale=0  isoft的难度系数为：Difficult=0.560
+
+因为是非移植项目，计算公式：
+moveScaleA=0.001   moveScaleB=0
+scaleC = this.getdifficultByScale(moveScaleB)*difficult; ------------>scaleC算出来是0.2016
+difficult = (newScaleA*difficult+scaleC) / (newScaleA*difficult+moveScaleB*difficult);--------->（0.001*0.56+0.2016）/（0.001*0.56+0*0.56）=361
+新算出来的difficult为300多，后续：
+
+//计算综合代码量CX
+double CX = (actualScale + config.getPrjBasecode().doubleValue() * difficult);---------> 算出来为72.561
+S1X = config.getPrjDevscaleprefix1().doubleValue()*Math.pow(CX,config.getPrjDevscaleprefix2().doubleValue())*1---------> 算出来为1276.43
+所以根本原因在于新的移植规模汇算的difficult为361造成的。没加这个逻辑之前一定是正常的。
+
+2.
+0E73BDB2-F134-496F-A0CF-8FE998A57EC8
+"【B70D064SP】【DC】实现动态路由接入DRNI
+项目计分错误，移植8.3K满分应该只有40分左右" 
+
+分析：首先这个项目的PCBType为空的，不包含移植字样，所以不是移植项目。
+PlanNewScale=0.  PlanMoveScale=8.3  FactNewScale=0   FactMoveScale=8.3  isoft的难度系数为：Difficult=0.180
+因为是非移植项目，计算公式：
+moveScaleA=0   moveScaleB=8.3
+scaleC = this.getdifficultByScale(moveScaleB)*difficult; ------------>scaleC算出来是0.2628
+difficult = (newScaleA*difficult+scaleC) / (newScaleA*difficult+moveScaleB*difficult);--------->（0*0.18+0.2628）/（0*0.18+8.3*0.18）=0.176
+//计算综合代码量CX
+double CX = (actualScale + config.getPrjBasecode().doubleValue() * difficult);---------> 算出来为6.857
+S1X = config.getPrjDevscaleprefix1().doubleValue()*Math.pow(CX,config.getPrjDevscaleprefix2().doubleValue())*1---------> 算出来为152.72
+
+litongxin那边的同步逻辑有点问题，她得改下。
+
+之后tongxin又重新执行； 现在PCBType为火车分支间移植（Comware专用），是移植项目。
+
+因为是移植项目，计算公式：
+moveScaleA=0   moveScaleB=8.3
+scaleC = this.getdifficultByScale(moveScaleB);------------>scaleC算出来是1.46
+difficult = (newScaleA+scaleC) / (newScaleA+moveScaleB);---------> （0+1.46）/（0+8.3）=0.176
+
+
+proRate =1383.334
+manHours =48
+//实际生产率大于200，则对项目规模进行折算；
+if (difficult*proRate > 200){
+	actualScale = (200/difficult)*(manHours/8)/1000;---------> 算出来为6.822
+}
+//计算综合代码量CX
+double CX = (actualScale + config.getPrjBasecode().doubleValue() * difficult);---------> 算出来为6.857
+S1X = config.getPrjDevscaleprefix1().doubleValue()*Math.pow(CX,config.getPrjDevscaleprefix2().doubleValue())*1---------> 算出来为152.72
+
+
+按照小马姐说的，把202007201238和202007201239问题单中的name_B字段改成了wangjunze 16576，从而保证了个人验收测试解单总DI为1.5
+重新算了这个：V模型项目，wangjunze给的excel测试：
+018DAC7F-92D3-11EB-862C-FA163E762A0D
+当季工作量：1000
+验收得分A:94.934  
+进度得分B:80 
+鉴定得分C:100  
+审计得分D：90
+开发质量得分Q1X:91.467
+个人提单总DI：6
+个人解单总DI：6
+个人验收测试解单总DI：1.5
+项目系统测试总DI：6
+项目系统验证测试总DI：1.5
+个人当季开发得分：92.02
+验收扣分：25.33
+进度扣分：50.00
+鉴定扣分：0.00
+审计扣分：10.00
+项目满分：100.00
+贡献度：100.00
+项目总得分：91.467
+员工当季工作量：当季总工作量(项目当量表)*当季员工贡献度百分比：1000.00
+
+
+20210621：
+处理bug
+SIT的代码已部署，得分汇算的定时任务已成功执行完毕
+
+wangjunze反馈的问题：
+1.
+4AA57AEF-A631-4795-BDA9-F1DF68F79ACF
+
+分析：
+这个项目
+PlanNewScale=0.05  PlanMoveScale=0  FactNewScale=0.01   FactMoveScale=0  isoft的难度系数为：Difficult=1.3
+
+因为是非移植项目，计算公式：
+moveScaleA=0.01   moveScaleB=0
+scaleC = this.getdifficultByScale(moveScaleB)*difficult; ------------>scaleC算出来是0
+difficult = (newScaleA*difficult+scaleC) / (newScaleA*difficult+moveScaleB*difficult);--------->1
+
+
+//计算综合代码量CX
+double CX = (actualScale + config.getPrjBasecode().doubleValue() * difficult);---------> 算出来为0.21
+S1X = config.getPrjDevscaleprefix1().doubleValue()*Math.pow(CX,config.getPrjDevscaleprefix2().doubleValue())*1---------> 算出来为1276.43
+
+
+和junze讨论了下之前的php代码那块验证得分的计算是错误的：
+新加的字段默认15.
+ALTER TABLE `dptconfig_list`
+	ADD COLUMN `prj_ATDIprefix` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '验证得分公式幂方中的系数' AFTER `v_checktestDI_b`;
+UPDATE dptconfig_list SET prj_ATDIprefix=15
+UPDATE dptconfig_list SET prj_ATaverageQuarter=70
+
+20210624：
+处理ruifang反馈的压测维护得分接口150不行的问题。
+优化了索引：----sql已发给玥秀做记录
+ALTER TABLE `idmsinfo_list` DROP INDEX `Index 3`, DROP INDEX `Index 4`;
+alter table idmsinfo_list add INDEX `submitIndex` (`IdmsType`,`CurrentNode`,`SubmitBy`,`DefectModifiedTime`)         
+alter table idmsinfo_list add INDEX `modifyIndex` (`IdmsType`,`CurrentNode`,`Name_B`,`DefectModifiedTime`)                               
+alter table idmsinfo_list add INDEX `locationIndex` (`IdmsType`,`CurrentNode`,`Locationer`,`DefectModifiedTime`)    
+alter table idmsinfo_list add INDEX `checkIndex` (`IdmsType`,`CurrentNode`,`Name_C`,`DefectModifiedTime`)    
+
+修改wanjunze提出的规模汇算的问题。
+
+sit，uat都已经执行完流水线，但是eos的调度中心菜单栏坏了，无法在eos上执行定时汇算任务，我这边在本地执行了下最新代码的开发得分汇算定时和当季得分的汇算定时。
+
+
+20210625：
+修改wangjunze反馈的问题。1。3的系数改成0.9，重新部署后执行完了定时任务
+
+wangjunze邮件中反馈的bug修改。
+
+禅道中的bug修改。
+
+本周工作汇总：
+6.21-6.25：	
+部署sit环境供测试人员测试，和测试人员讨论分析测试出来的问题，前后端联调测试接口处理禅道上的bug，对业务提出的问题进行分析解决，对业务提出的新的移植规模逻辑进行再次修改并部署测试。
+
+
+20210628：
+拆分V模型项目和其他的，V模型7.14号左右上线。
+
+和前端联调修改bug
+
+
+
+
+
+
+
+
+
+
+
+kcms重构项目：（把研发资产的前端代码推到github上，kcms的后端代码推到github上）
+项目经理1+前端1+后端3+测试1+UI设计
+前端：vue框架 +elementUI组件
+后端：
+git maven mysql
+Swagger接口文档
+​Spring boot
+​Mybatis-plus
+JWT  SSO单点登录
+与部门EOS平台集成  定时任务xxl-job  部署流水线发布
+与部门的绿洲融合平台集成
+
+项目经理1：输出需求规格文档，负责和业务沟通需求，梳理逻辑，与DBA等人员沟通（防火墙申请等问题）。
+UI设计师：负责系统页面的设计及美化工作。
+前端人员：根据原系统的页面，UI设计师完成进一步的优化工作，前端根据优化后的页面进行页面的开发。前期用的假数据，后期利用后端提供接口的真实数据
+测试人员：负责系统的sit，uat测试环节。对测试的内容反馈到禅道上，然后对开发人员修改完毕的进行回归测试，编写测试脚本和用例给业务测试，编写测试文档，利用就jmeter进行重要接口的压力测试，并编写相应的压测文档。
+
+
+后端人员1： 外围系统Web接口开发。
+具体工作：
+1.接口开发：获取数据中台的人员部门等数据信息。和对方约定数据传输的格式，利用http请求带上对方系统的用户名和密码获取token地址，再利用http请求带上请求头和获取数据的接口地址来获取数据。
+然后解析数据存入咱们自己数据库中的对应表中
+2.解析excel：从指定位置读取excel文件同步数据
+3.解析xml：http请求带上用户名密码url地址来解析。
+以上都是用定时任务来同步。
+
+后端人员2：（可以让tongxin讲下绿洲平台怎么进行同步的）
+外围系统集成：
+该项目需要拉其他项目的数据，isoft，idms，bpm，tms等系统，这些系统有的是oracle，mysql,sqlserver的
+所以讨论后用公司的绿洲融合平台来做，利用双方数据库的连接信息，手写执行的脚本，配置定时任务来执行同步数据。
+
+后端人员3：
+负责系统主要业务逻辑的开发。
+进行框架的选型，采用springboot+mybatisplus
+数据模型结构设计（兼容现有结构，便于数据迁移）
+主要业务逻辑开发：
+1.sso单点登录功能开发。
+2.各个算分页面的接口开发（当季得分，开发得分，维护得分，评审得分，关键事件分，平台贡献得分）
+3.团队得分模块，员工得分模块的接口开发。
+4.各个得分的定时汇算功能开发。
+难点复杂点：各个得分的具体汇算的细节，得分怎么来的，这些得提前和业务商量确定算分你的公式等。
+
+系统开发到后期，测试人员介入进行接口的测试。前后端人员对测试的问题进行测试，主要是在sit环境下进行测试。测试的差不多了在让业务介入到uat环境测试。
+都测试ok的话，到时候在项目上线。
+
+
+推送文件到github中：
+github:
+tracylulu  2627240624lulu
+
+Git config -- local    默认只对某个仓库有效
+Git config -- global  对当前用户的所有仓库有效，推荐最常用
+git config --local --list
+
+//配置用户名
+git config --local user.name  "tracylulu"
+//配置邮箱
+git config --local user.email "1769517572@qq.com"
+//配置代理，不然会连接超时
+git config --local http.proxy proxy02.h3c.com:8080
+
+
+git init
+git add .
+git commit -m "first commit"
+
+git remote add origin https://github.com/tracylulu/kcms.git
+git push -u origin master
+
+
+
+
+
+
+
+
+
+
+
+已2020年为参考标准，2020年省控线：515        515+35=550
+
+安徽财经大学（蚌埠）：   2020年一本录取最低分/最低位次：558/47710
+专业：    					平均分  		 最低分/最低位次
+1.计算机类（含几个专业）：  573	   			    567/41947
+2.数据科学与大数据技术		569					565/43339
+3.电子信息类
+（含电子信息工程、人工智能）568	                565/43339
+
+
+安徽工业大学（马鞍山）：  2020年一本录取最低分/最低位次：539/62179
+计算机类          			565					559/47587
+电子信息工程				561					557/49033
+人工智能					559					555/50457
+数据科学与大数据技术      	558					554/51169
+
+
+安徽理工大学（淮南）：2020年一本录取最低分/最低位次：533/67116
+计算机科学与技术			555					550/54224
+软件工程					551					547/56482
+人工智能					544					538/63535
+数据科学与大数据技术		545					540/61964
+
+
+安徽师范大学（芜湖）：2020年一本录取最低分/最低位次：568/40784
+计算机类					579					574/37213
+（含人工智能、计算机科学与技术、软件工程、物联网工程、网络空间安全）	
+
+
+
+安徽建筑大学（合肥）：2020年一本录取最低分/最低位次：554/50552
+计算机科学与技术 			569					567/41947
+电子信息工程   				566					564/43976
+网络工程					563					561/46146
+
+
+安徽农业大学（合肥）：2020年一本录取最低分/最低位次：543/59604
+计算机类:					565					562/45423
+（含计算机科学与技术、网络工程、物联网工程）
+数据科学与大数据技术		561					558/48303
+智能科学与技术				559					558/48303
+
+
+ 
+安徽工程大学（芜湖）：2020年一本录取最低分/最低位次：528/71569
+软件工程					-					540/61964
+计算机科学与技术			-					539/62729
+数据科学与大数据技术		-					537/64339
+人工智能					-					537/64339
+
+
+
+
+
+
+
+
+origin：http://localhost:8080
+
+export.url=http://kcms-newtest.h3c.com/individual?
+
+http://kcms-test.h3c.com/#dashboard?name=%C0%EE%CA%C0%D7%BF&id=14937&currentQuarter=2021Q2&postType=%C8%ED%BC%FE%BF%AA%B7%A2
+
+
+http://kcms-test.h3c.com/#dashboard?name=%E6%9D%8E%E4%B8%96%E5%8D%93&id=14937&currentQuarter=2021Q2&postType=%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91
+
+
+
+
+
+
+<div><a url="http://dev3.h3c.com:8080/bpm/form?wf_num=F_h3c08N046_A006&amp;wf_docunid=e7db55d70a4b104cac0a909036b7166f6f7d" href="http://dev3.h3c.com:8080/bpm/form?wf_num=F_h3c08N046_A006&amp;wf_docunid=e7db55d70a4b104cac0a909036b7166f6f7d" class="aStyle" target="_blank" onclick="clickLinkUrl(1,0,this)"><span style="color:#CC0200;">华为</span><span style="color:#CC0200;">3</span><span style="color:#CC0200;">Com</span> <span style="color:#CC0200;">标准</span><span style="color:#CC0200;">MIB</span><span style="color:#CC0200;">基线</span><span style="color:#CC0200;">1.0</span>;</a></div><div class="contentStyle"><span style="color:#CC0200;">华为</span><span style="color:#CC0200;">3</span><span style="color:#CC0200;">Com</span> <span style="color:#CC0200;">标准</span><span style="color:#CC0200;">MIB</span><span style="color:#CC0200;">基线</span><span style="color:#CC0200;">1.0</span>,,,,,chengrugang 00141...</div><div style="color: green;" onclick="divBorder(this);" class="dirStyle">http://dev3.h3c.com:8080/bpm/form?wf_num=F_h3c08N046_A006&amp;wf_docunid=e7db55d70a4b104cac0a909036b7166f6f7d</div>
+	
+	
+
+http://api.eos-ts.h3c.com/kcms-ts/V1.0/swagger/swagger-ui.html#/%E7%B3%BB%E7%BB%9F%E7%9B%B8%E5%85%B3%E7%9A%84%E5%85%AC%E5%85%B1%E6%8E%A5%E5%8F%A3
+
+{"responseTicket":"","url":"http://localhost:8080/develop"}
+	
+
+  {
+        "id": null,
+        "quarter": null,
+        "projectName": "【V9】支持combo接口光电切换功能",		项目名称
+        "projectId": "C003C984-3B96-4C93-B3A9-1B68607CCB77",
+        "account": null,
+        "s1x": 37.72,			项目满分
+        "contributevalue": 100,	个人贡献度
+        "saCount": 26.63,		实际项目得分
+        "type": null,
+        "countDate": null,
+        "scale": "1.25",		开发规模(K)
+        "sa": 26.63,			个人项目得分
+        "amin": 5.66,   	验收扣分
+        "bmin": 0,				进度扣分
+        "cmin": -1,			鉴定扣分
+        "dmin": 3.77		审计扣分
+
+
+		"totaldi": 0,  评审di
+      "serialNumber": "CMMR2021040046",
+      "problemNumber": 0,
+      "criticalnum": 0,  严重问题个数
+      "ordinarynum": 0,  一般问题个数
+      "tipnum": 0,				提示问题个数
+      "totalnum": 0,		评审问题总数
+      "url":
+      "reviewScore": 0  评审得分
+
+
+
+
+
+搜腾讯出现异常的数据：
+标题部分：
+<span style='color:#CC0200;'>腾</span><span style='color:#CC0200;'>讯</span>会议 - <span style='color:#CC0200;'>腾</span><span style='color:#CC0200;'>讯</span>会议使用说明;
+
+内容部分：
+<span style='color:#CC0200;'>腾</span><span style='color:#CC0200;'>讯</span>会议 - <span style='color:#CC0200;'>腾</span><span style='color:#CC0200;'>讯</span>会议使用说明<h1 style="text-align: left;">
+
+一、PC端使用说明&nbsp;</h1><h2;，按照当地通话标准收费，国际长途按国际漫游标准收费，<span style='color:#CC0200;'>腾</span><span style='color:#CC0200;'>讯</span>会议平台不收取
+额外的服务费。;&nbsp;</p><p><br></p><h3><span style="font-weight: bold;">1.3、<span style='color:#CC0200;'>腾</span><span style='color:#CC0200;'>讯</span>会议显示名是“...
+
+
+
+"attachment.content": ["<em>腾</em><em>讯</em>会议 - <em>腾</em><em>讯</em>会议使用说明<h1 style=\"text-align: left;\">\n\n一、PC端使用说明&nbsp;</h1><h2", "，按照当地通话标准收费，国际长途按国际漫游标准收费，<em>腾</em><em>讯</em>会议平台不收取\n额外的服务费。", "
+&nbsp;</p><p><br></p><h3><span style=\"font-weight: bold;\">1.3、<em>腾</em><em>讯</em>会议显示名是“"]
+
+
+操作日志表:
+CREATE TABLE `operation_log` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`model_code` VARCHAR(200) NULL DEFAULT NULL,
+	`model_name` VARCHAR(200) NULL DEFAULT NULL,
+	`summary` VARCHAR(200) NULL DEFAULT NULL,
+	`content` TEXT NULL,
+	`user_id` VARCHAR(50) NULL DEFAULT NULL,
+	`ip` VARCHAR(50) NULL DEFAULT NULL,
+	`log_time` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='操作日志'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+邮件记录表
+CREATE TABLE `mail_info` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`send_to` VARCHAR(100) NULL DEFAULT NULL COMMENT '发送目标地址',
+	`cc_to` VARCHAR(100) NULL DEFAULT NULL COMMENT '抄送目标地址',
+	`subject` VARCHAR(500) NULL DEFAULT NULL COMMENT '邮件主题',
+	`content` VARCHAR(500) NULL COMMENT '邮件内容',
+	`creator` VARCHAR(50) NULL DEFAULT '邮件创建人',
+	`create_time` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='邮件记录表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+员工职类常量表 
+CREATE TABLE `post_type_constant` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`post_name1` VARCHAR(20) NULL DEFAULT NULL COMMENT '职类名称1',
+	`post_name2` VARCHAR(20) NULL DEFAULT NULL COMMENT '职类名称2',
+	`post_name3` VARCHAR(20) NULL DEFAULT NULL COMMENT '职类名称3',
+	`post_type` VARCHAR(20) NULL DEFAULT NULL COMMENT '职类类型',
+	`delete_flag` INT NULL DEFAULT NULL COMMENT '删除标识，0无效 1有效',
+	`creator` VARCHAR(10) NULL DEFAULT NULL COMMENT '创建人工号',
+	`create_time` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+	`modifier` VARCHAR(10) NULL DEFAULT NULL COMMENT '修改人工号',
+	`modifi_time` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='员工职类常量表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+isoft_check状态常量表
+CREATE TABLE `isoft_check_type_constant` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`pro_type` VARCHAR(20) NULL DEFAULT NULL ,
+	`pro_type_cn` VARCHAR(20) NULL DEFAULT NULL ,
+	`pro_state` VARCHAR(20) NULL DEFAULT NULL ,
+	`pro_state_cn` VARCHAR(20) NULL DEFAULT NULL ,
+	`delete_flag` INT NULL DEFAULT NULL COMMENT '删除标识，0无效 1有效',
+	`creator` VARCHAR(10) NULL DEFAULT NULL COMMENT '创建人工号',
+	`create_time` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+	`modifier` VARCHAR(10) NULL DEFAULT NULL COMMENT '修改人工号',
+	`modifi_time` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='isoft_check状态常量表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+project_quarter_work_list当季当量数据表
+CREATE TABLE `project_quarter_work_list` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`project_id` VARCHAR(36) NOT NULL COMMENT '项目名称编号',
+	`quarter_str` VARCHAR(50) NULL DEFAULT NULL COMMENT '季度',
+	`pro_quar_work` DECIMAL(38,1) NULL DEFAULT NULL COMMENT '当季工作量（当量）',
+	`sync_status` VARCHAR(50) NULL DEFAULT NULL COMMENT '同步状态标识',
+	`sync_time` DATETIME DEFAULT NULL COMMENT '同步时间标识',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_quarter_work_list当季当量数据表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+project_acceptance_problems_list项目验收问题单视图表
+CREATE TABLE `project_acceptance_problems_list` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`project_id` VARCHAR(200) NOT NULL COMMENT '项目编号id',
+	`defect_no` VARCHAR(50) NULL DEFAULT NULL COMMENT '问题单号',
+	`sync_status` VARCHAR(50) NULL DEFAULT NULL COMMENT '同步状态标识',
+	`sync_time` DATETIME NULL DEFAULT NULL COMMENT '同步时间标识',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_acceptance_problems_list项目验收问题单视图表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+project_summary_V  v模型的汇算中间表（countDate使用varchar类型好汇算）
+CREATE TABLE `project_summary_v` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`projectId` VARCHAR(300) NOT NULL COMMENT '项目ID',
+	`projectName` VARCHAR(300) NOT NULL COMMENT '项目名称',
+	`quarter` VARCHAR(20) NOT NULL COMMENT '季度',
+	`account` VARCHAR(50) NOT NULL COMMENT '人员',
+	`ProTotalWorkd` DECIMAL(38,1) NOT NULL DEFAULT '0.0' COMMENT '项目截至当日的总工作量',
+	`ProScored` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '项目截至当日的得分Bx',
+	`ContributeValued` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '项目截至当日的员工的贡献度百分比Rx',
+	`TotalScored` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '个人Cx截至当日实际总得分',
+	`ContributeValue` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '个人当季贡献度百分比',
+	`Sa_count` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '员工Cx当季总得分Sdx',
+	`ProQuarWork` DECIMAL(38,1) NOT NULL DEFAULT '0.0' COMMENT '个人当季工作量（当量）',
+	`countDate` VARCHAR(20) NULL DEFAULT NULL COMMENT '汇算日期',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_summary_V  v模型的汇算中间表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+project_problems_di 项目总问题单DI汇算表
+CREATE TABLE `project_problems_di` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`ProjectSerialNum` VARCHAR(200) NOT NULL COMMENT '项目流水号',
+	`projectId` VARCHAR(300) NOT NULL COMMENT '项目ID',
+	`projectName` VARCHAR(300) NOT NULL COMMENT '项目名称',
+	`account` VARCHAR(50) NOT NULL COMMENT '员工工号',
+	`SubQuestDI` INT NOT NULL DEFAULT '0' COMMENT '个人提单总DI',
+	`SolveQuestDI` INT NOT NULL DEFAULT '0' COMMENT '个人解单总DI',
+	`CheckSolveQDI` INT NOT NULL DEFAULT '0' COMMENT '个人验收测试解单总DI',
+	`ProQuestDI` INT NOT NULL DEFAULT '0' COMMENT '项目系统测试总DI',
+	`countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_problems_di 项目总问题单DI汇算表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+notice_read_record 各个员工最新公告阅读记录表
+CREATE TABLE `notice_read_record` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`employee_id` VARCHAR(10) NULL DEFAULT NULL  COMMENT '员工工号',
+	`notice_id` VARCHAR(10) NULL DEFAULT NULL COMMENT '公告id',
+	`is_read` int NULL DEFAULT NULL COMMENT '公告是否阅读（0未阅读，1已阅读）',
+	`readdate` DATETIME NULL DEFAULT NULL COMMENT '阅读日期',
+	PRIMARY KEY (`id`)
+)
+COMMENT='notice_read_record 各个员工最新公告阅读记录表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+project_su_v  v模型的汇算中间表(代替这个表project_summary_v)
+CREATE TABLE `project_su_v` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`projectName` VARCHAR(1000) NULL DEFAULT NULL  COMMENT '项目名称',
+	`projectId` VARCHAR(1000) NULL DEFAULT NULL  COMMENT '项目ID',
+	`Sa` DECIMAL(20,2) NULL DEFAULT NULL COMMENT '当季得分',
+	`quarter` VARCHAR(10) NULL DEFAULT NULL COMMENT '季度',
+	`seconddptcode` VARCHAR(50) NULL DEFAULT NULL COMMENT '二级部门编号',
+	`quarterWork` DECIMAL(20,2) NULL DEFAULT NULL COMMENT '当季度工作量',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_su_v  v模型的汇算中间表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+------------------------------------------------------------------------------------------------------------------------
+接口约定：
+1.团队得分入参接口：
+{
+  "city": "所有",----字符串，所有或者某一个城市
+  "currentdptList": [],----有就传数组，没有传空的数组
+  "group": "thirddptcode",----字符串
+  "postType": "软件开发",----字符串
+  "quarterList": [
+    "2021Q2"
+  ], ----有就传数组，没有传空的数组
+  "seconddpt": "50041348",----字符串
+  "special": "否",----字符串，是否
+  "thirddptList": []----有就传数组，没有传空的数组
+  "pageNum":1,
+  "pageSize":20
+}
+
+{
+  "city": "所有",
+  "currentdptList": [],
+  "group": "thirddptcode",
+  "postType": "软件开发",
+  "quarterList": [
+    "2021Q2"
+  ],
+  "seconddpt": "50041348",
+  "special": "否",
+  "thirddptList": [],
+  "pageNum": 1,
+  "pageSize": 5
+}
+
+2.员工得分入参接口：
+{
+  "city": "所有",
+   "employeeSearchKey": "",
+  "currentdpt": "所有",
+  "fivedpt": "所有",
+  "positiontype": "所有",
+  "postType": "软件开发",
+  "quarterList": [
+    "2021Q2"
+  ],
+  "seconddpt": "50042499",
+  "thirddpt": "所有",
+  "pageNum": 1,
+  "pageSize": 5
+}
+
+
+参数介绍：
+数组类型的有就传数组，没有传空的数组
+字符串类型的有就传字符串，没有就传空字符串。
+pageNum：当前页
+pageSize：每页显示数
+
+加一个排序的传参。现在默认是按照rank排序返回的，
+
+------------------------------------------------------------------------------------------------------------------------
+20210518：
+1./api/myScore/notice  获取通知接口-notice
+不用传参数。
+
+2./api/myScore/overview 总览接口—overview
+{
+  "id": "11208",
+  "quarterList": [
+    "2020Q1","2020Q2","2020Q3","2020Q4","2021Q1","2021Q2"
+  ]
+}
+
+
+
+1622106760678
+参数介绍：数组类型的有就传数组，没有传空的数组.例如："quarterList": []
+
+3./api/myScore/totalScore  当季得分(软件开发)列表查询接口-total_score
+工号:id   季度：quarter
+举例：id: 04367		quarter: 2021Q1
+
+4./api/myScore/empProjectList  个人开发得分(软件开发)查询接口-emp_project_list
+工号:id   季度：quarter
+
+5./api/myScore/empProjectDetail  开发得分项目详情接口-emp_project_detail
+项目编号：id   类型：type（1表示软件开发，2345表示和硬件开发相关的）
+
+6./api/myScore/empDefend  维护得分(软件开发)查询接口-emp_defend
+工号:id   季度：quarter
+
+7./api/myScore/empDefendList  维护得分项目详情接口-emp_defend_list
+{
+  "id": "04367",
+  "pageNum": 1,
+  "pageSize": 20,
+  "quarter": "2021Q1",
+  "type": 1
+}
+工号:id   季度：quarter 类型：type（1,2表示软件开发的普通单和同步单，345表示和硬件开发相关的）
+pageNum：当前页
+pageSize：每页显示数
+
+8./api/myScore/empAudit  评审得分查询接口-emp_audit
+工号:id   季度：quarter
+
+9./api/myScore/empAuditList  评审得分详情接口-emp_audit_list
+{
+  "id": "04367",
+  "pageNum": 1,
+  "pageSize": 20,
+  "quarter": "2021Q1"
+}
+
+10./api/myScore/addScoreList  关键事件分列表汇总列表接口-add_score_list
+工号:id   季度：quarter
+
+11./api/myScore/addScoreDetail  关键事件得分详情接口-add_score_detail
+{
+  "id": "04367",
+  "pageNum": 1,
+  "pageSize": 2,
+  "project": "平台新问题数量",
+  "quarter": "2021Q1"
+}
+
+12./api/myScore/platform  平台贡献得分查询接口-platform
+工号:id   季度：quarter
+
+13./api/myScore/platformList  平台贡献得分详情接口-platform_list
+{
+  "id": "02137",
+  "pageNum": 1,
+  "pageSize": 2,
+  "quarter": "2021Q1",
+  "type": 4
+}
+type类型。1表示经验案例，2表示共享技术，3表示规范，4表示专利，5表示cbb,6表示疑难复现
+
+
+申请补录模块接口：
+
+1./api/apply/addScoreList  关键事件分列表汇总列表接口-add_score_list
+工号:id   季度：quarter
+
+2./api/apply/addScoreReplyList  申请记录列表接口-add_score_reply_list
+工号:id   季度：quarter
+
+3./api/apply/addScoreSelect  补录申请中类别下拉列表接口-add_score_select
+工号:id   二级部门编码：seconddptcode  三级部门编码：thirddptcode 
+
+4.
+
+
+
+
+
+
+12524ms
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+外围系统表的约定规范：
+
+云数软件得分计算涉及的表：isoft_project_cloud_list 项目信息表
+accepted_code    no_accepted_code  di_density  progress_deviation   contribution
+这些字段是varchar类型的，有空串的数据。
+
+

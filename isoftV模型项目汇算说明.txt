@@ -1,0 +1,206 @@
+isoftV模型项目：
+项目关联问题单总DI
+Isoft项目流水号关联IDMS流水号下，此项目所有问题单DI值之和。----------这两个流水号是怎么对应的？isoft下的一个流水号可以对应idms下的多个相同的流水号记录，取这个ODC_Severity字段算DI
+
+截至当日项目总工作量
+截至当日项目总工作量=当前项目所有季度的当季工作量之和----------去当量表中查
+
+项目关联个人解单总DI
+Isoft项目流水号关联IDMS流水号下，此项目为“修改实施人”所有问题单DI值之和。--------同上，不同的是去对应人的
+
+应该是去项目贡献度表中查该项目哪些人做了，利用这个人和idms的比较是吧，没有的人员也加到这个表中
+
+项目关联个人提单总DI
+Isoft项目流水号关联IDMS流水号下，此项目为“提单人”所有问题单DI值之和。
+
+项目关联验收测试解单总DI
+Isoft验收项目与问题单数据中，此项目为“修改人实施人”所有问题单DI值之和。------------isoft表和这个表又是怎么对应的？isoft表中的projectid与这个表中对应，取出问题单号，再根据这个问题单号去idms中查出来算di
+
+------上面的这些人分别指idmslist中的哪些字段？
+
+
+贡献度百分比
+贡献度百分比=员工所有季度工作量之和/项目总工作量
+
+员工所有季度当前项目工作量之和
+项目总工作量*(Q1当季贡献度百分比+Q2当季贡献度百分比)
+
+
+5.3.1.1	项目满分
+1)	原isoft项目计算方法:
+项目总得分（满分）SA = （Q1X*S1X）/100，Q1X默认为100
+跨季项目当季总得分SA = RX*（Q1X*S1X）/100
+原计算公式：质量分为100%，即为满分。
+2)	新V模型isoft项目计算方法:
+W1X:当季工作量
+项目当季总得分（满分）SA = （Q1X*W1X*参数【项目工作量系数】）/100，Q1X默认为100
+5.3.1.2	当季实际项目得分
+当季项目实际得分SA = （Q1X*W1X*参数【项目工作量系数】）/100，Q1X为实际值；
+跨季度项目：（每个季度工作量之和*参数【项目工作量系数】*Q1X）/100-之前季度归档季度的实际项目得分
+
+举例;项目跨q2,q3,q4三个季度。
+q2单算，
+
+q3
+
+
+ q4算
+
+
+
+5.4.3.2	本季度、跨季度第一季度个人项目得分:
+个人项目得分 = (项目当季工作量*参数【项目工作量系数】- 系统测试总DI*系数A - 验收测试解单(这个项目的验收问题，取项目验收问题单视图表中的值关联)总DI*系数B)*质量得分*项目当季个人贡献度  + [(个人提单的系统测试总DI值*提单系数 + 个人解单（系统测试单）总DI值*解单系数)*系数A +个人验收测试解单总DI*系数B]*质量得分
+
+跨季度非第一季度个人项目得分:
+1.	项目截至当日总工作量=项目所有季度工作量之和
+2.	项目截至当日的得分Bx = (项目截至当日总工作量*参数【项目工作量系数】- 系统测试总DI*系数A-系统验收测试总DI*系数B)*质量得分
+在现有系统进行各参数的配置？稍后提供一个模板
+项目工作量系数  
+系数A=系统测试DI系数
+员工ST提单DI系数
+员工ST解单DI系数
+系数B=验收测试解单DI系数
+3.	项目截至当日员工的贡献度百分比Rx =(员工Cx 所有季度项目工作量之和/项目截至当日总工作量)
+项目员工截至当日Cx 所有季度工作量之和 =Q1当季总工作量*Q1当季贡献度百分比+Q2当季总工作量*Q2当季贡献度百分比
+4.	员工Cx截至当日项目实际总得分Sx = Bx *Rx+  [(个人提单的系统测试总DI值*提单系数 + 个人解单（系统测试单）总DI值*解单系数)*系数A +个人验收测试解单总DI*系数B] *质量得分
+5.	员工Cx当季此项目总得分Sdx = Sx - S1-S2… - Sn
+说明：S1、S2、Sn针对跨季度项目，已归档的当季项目总得分值，当季实现多退少补的原则
+
+注：
+减分的用当季工作量去代替S1X。
+
+project_summary_v  v模型的汇算中间表  这个表的数据每天更新记录，不用删数据
+之前季度归档季度的实际项目得分  这个去当前季度归档日（后推30天）的project_summary_v表中的ProScored字段
+
+
+20210526:
+先在软件开发的配置表dptconfig_list中自己配置下这几个系数。
+项目工作量系数    
+系数A=系统测试DI系数
+员工ST提单DI系数
+员工ST解单DI系数
+系数B=验收测试解单DI系数
+
+
+20210618:wangjunze反馈质量得分都是按照百分制算的。公式里面。
+
+
+
+
+分析思路：
+
+project_problems_di 项目总问题单DI汇算表
+    	CREATE TABLE `project_problems_di` (
+    		`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+    		`ProjectSerialNum` VARCHAR(200) NOT NULL COMMENT '项目流水号',
+    		`projectId` VARCHAR(300) NOT NULL COMMENT '项目ID',
+    		`projectName` VARCHAR(300) NOT NULL COMMENT '项目名称',
+    		`account` VARCHAR(50) NOT NULL COMMENT '员工工号',
+    		`SubQuestDI` INT NOT NULL DEFAULT '0' COMMENT '个人提单总DI',
+    		`SolveQuestDI` INT NOT NULL DEFAULT '0' COMMENT '个人解单总DI',
+    		`CheckSolveQDI` INT NOT NULL DEFAULT '0' COMMENT '个人验收测试解单总DI',
+    		`ProQuestDI` INT NOT NULL DEFAULT '0' COMMENT '项目系统测试总DI',
+    		
+    		`ProQuestDI` INT NOT NULL DEFAULT '0' COMMENT '验收测试总DI',---------------新加的字段
+    		`countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期',
+    		PRIMARY KEY (`id`)
+    	)
+    	
+    	
+    	CREATE TABLE `project_summary_v` (
+    			`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+    			`projectId` VARCHAR(300) NOT NULL COMMENT '项目ID',
+    			`projectName` VARCHAR(300) NOT NULL COMMENT '项目名称',
+    			`quarter` VARCHAR(20) NOT NULL COMMENT '季度',
+    			二级部门编码
+    			`ProTotalWorkd` DECIMAL(38,1) NOT NULL DEFAULT '0.0' COMMENT '当季的工作量w1x',
+    			`ProScored` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '项目截至当日的得分Sa',
+    			之前表的这几个字段：
+    			`ContributeValued` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '项目截至当日的员工的贡献度百分比Rx',
+    			`TotalScored` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '个人Cx截至当日实际总得分',
+    			`ContributeValue` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '个人当季贡献度百分比',----------放到project_summary表中的已有字段
+    			`Sa_count` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '员工Cx当季总得分Sdx',----------放到project_summary表中的已有字段
+    			`ProQuarWork` DECIMAL(38,1) NOT NULL DEFAULT '0.0' COMMENT '个人当季工作量（当量）',
+    			`countDate` VARCHAR(20) NULL DEFAULT NULL COMMENT '汇算日期',
+    			
+    	定时必须先删除当前季度的数据，之前把原来的删除的代码置后了，违背了之前软件开发的逻辑，因为跨季度的时候Q2取的之前Q1的得分之和，不删除就去的是Q2+Q1的了
+    			
+    	项目关联问题单总DI  proQuestDI先算出来
+    	验收测试总DI    先算出来
+    	Kx为分摊比例。按照贡献度表中的对应项目的人员贡献度算每个人的di这些值  List<project_problems_di>
+		for (int j = 0; j < kx.size(); j++) {
+			int subQuestDI=0;//个人提单总DI
+        	int solveQuestDI=0;//个人解单总DI
+        	int checkSolveQDI=0;//个人验收测试解单总DI
+		}
+    	
+    	if(项目的开始时间是否在当前季度) {
+    		本季度、跨季度第一季度
+    		W1X:当季工作量
+    		当季项目实际得分SA = （Q1X*W1X*参数【项目工作量系数】）/100，Q1X为实际值；
+    		is_ first=true;
+    	}else {
+    		跨季度的其他季度比如q2季度
+    		List<project_summary_v>  循环找出本项目(Map(projectId,List<project_summary_v>)参数传过来)之前季度的工作量和得分之和：before_work   before_score
+    		for (int i = 0; i < project_summary_v.length; i++) {
+			}
+    		跨季度项目得分：
+    		W1X:当季工作量
+    		跨季度项目：（每个季度工作量之和*参数【项目工作量系数】*Q1X）/100-之前季度归档季度的实际项目得分
+    		SA=(before_work+w1x)*参数【项目工作量系数】*Q1X）/100-before_score
+    		is_ first=false;
+    	}
+    	
+    	存入到List<project_summary_v>操作：
+    	吧上面的W1X  SA
+    	存入ProTotalWorkd    ProScored   List<project_summary_v>
+    	
+    	存入到List<project_summary>操作：
+    	Kx为分摊比例。按照贡献度表中的对应项目的人员贡献度算每个人的分数
+		for (int j = 0; j < kx.size(); j++) {
+			for (int j = 0; j <  List<project_problems_di>.size(); j++) {  举例：1.2 .3 .4 .5这5个人  上面的List<project_problems_di转成map<account,List<>>
+				if(kx中的人员和project_problems_di中的人员匹配)
+				if(如果是第一季度) {
+					个人项目得分Sx = (项目当季工作量*参数【项目工作量系数】- 系统测试总DI*系数A - 验收测试解单(这个项目的验收问题，取项目验收问题单视图表中的值关联)总DI*系数B)
+							*质量得分*项目当季个人贡献度  + [(个人提单的系统测试总DI值*提单系数 + 个人解单（系统测试单）总DI值*解单系数)*系数A +个人验收测试解单总DI*系数B]*质量得分
+					个人的贡献度怎么算？kx.get(i)	
+					员工工作量account_work：Q1当季总工作量(项目当量表)*Q1当季贡献度百分比(kx.get(i))
+					
+					
+				}else {
+					1.	项目截至当日总工作量=项目所有季度工作量之和(before_work+w1x)
+					2.	项目截至当日的得分Bx = ((before_work+w1x)*参数【项目工作量系数】- 系统测试总DI*系数A-系统验收测试总DI*系数B)*质量得分---这个字段不用存
+					3.	项目截至当日员工的贡献度百分比Rx =(员工Cx 所有季度项目工作量之和/项目截至当日总工作量)-----？              /(before_work+w1x)
+					项目员工截至当日Cx 所有季度工作量之和 =Q1当季总工作量(项目当量表)*Q1当季贡献度百分比+Q2当季总工作量*Q2当季贡献度百分比
+					sum（当季总工作量(项目当量表)*当季贡献度百分比）
+					员工工作量account_work：当前季度的
+					4.	员工Cx截至当日项目实际总得分Sx = Bx *Rx+  [(个人提单的系统测试总DI值*提单系数 + 个人解单（系统测试单）总DI值*解单系数)*系数A +个人验收测试解单总DI*系数B] *质量得分		
+							
+					去project_summary(Map(projectId,List<project_summary>)参数传过来)按照项目找到这个人的前几个 季度的个人得分之和   before_Sa   员工工作量	account_work
+					for (int i = 0; i < project_summary.length; i++) {
+						if(project_summary中的人员和project_problems_di中的人员匹配)
+					}
+					员工个人得分：Sx=Sx-before_Sa
+					}
+				}
+		
+		减分的用当季工作量去代替S1X。----------?
+		存入project_summary中  加一个字段，区分是v模型项目还是其他的项目
+		（S1X）项目满分：项目当季总得分（满分）SA = （Q1X*W1X*参数【项目工作量系数】）/100，Q1X默认为100
+		（Sa_count）项目总得分：project_summary_v表中的ProScored
+		（contributevalue）员工个人贡献度：
+		（Sa）员工个人得分：Sx
+			加一个字段:员工工作量	account_work
+			
+		}
+    	
+  */  	
+    	
+
+
+
+
+
+
+
+

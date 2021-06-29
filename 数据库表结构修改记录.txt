@@ -1,0 +1,463 @@
+	软	add_score   				关键事件得分表
+		add_score_audit				关键事件审核表
+		add_score_select			关键事件选项表              status字段现在数据库为TINYINT ，建议改为INT类型存储。    MySQL数据库中tinyint类型字段对应JAVA的boolean类型,true和false。数据库这样设置不常见
+同	软	admin_list					管理员列表				    数据库缺少自增id  表数据是从excel中同步过来的--------------没有增加自增id，该表原来有id。
+同	软	analyzeinfo_list			待分析件信息表			    数据库有自增id  表数据是从sqlserver中同步过来的    				        										trouble字段现在是text类型------------text字段暂时没改，太长了，可以先改成varchar（2000）到时候同步这表的时候再截取2000个字符存起来就行了。
+同	软	cbbinfo_list				CBB视图信息表			    数据库有自增id  表数据是从oracle中同步过来的
+		charge_score				特殊事件得分表				
+同	软	department_list				部门列表				    数据库缺少自增id  表数据是后续会写接口同步过来的		
+		design_hardware_score		硬件测试设计表				数据库缺少自增id  example_num tool_num store_num这三个字段涉及不合理，应该由float改成int。
+	软	design_list					测试设计列表
+	软	design_score				测试设计得分表				数据库缺少自增id
+	软	dptaveragescore_list		二级部门季度平均得分表
+		dptconfig_hardwaretest_list 硬件测试算法参数表			数据库缺少自增id    dptcode建议设置成varchar类型，现在是int
+		dptconfig_hardware_list		硬件开发算法参数配置表		数据库缺少自增id	dptcode建议设置成varchar类型，现在是int
+	软	dptconfig_list				软件开发算法参数配置表		数据库自增id设置的有问题
+		dptconfig_softtest_list		软件测试算法参数配置表		dptcode建议设置成varchar类型，现在是int
+同	软	dptmanager_list				部门领导表					数据库缺少自增id  表数据是后续会写接口同步过来的	--------------没有增加自增id，该表原来有id。
+同	软	employee_list				员工信息表					数据库缺少自增id  但它又工号作为主键id   表数据是后续会写接口同步过来的	  -------------wucan建议不加主键，维持这样，因为这个id用的地方很多
+同		employee_resign_list		离职员工信息表				数据库缺少自增id  表数据是后续会写接口同步过来的   没有用到这个表？	 		-------------暂时没用到
+	软	execute_score				软件测试测试执行得分表		数据库缺少自增id
+同	软	experienceinfo_list			经验案例信息表				数据库有自增id  表数据是后续会写接口同步过来的   takecontroller中看出来的，待确定-------------xml同步过来的
+		feedback					系统问题反馈表				content字段现在是text类型，改为varchar。  time字段现在是int，建议改成datetime
+		hardware_test_example		硬件测试测试用例			数据库缺少自增id  表数据是从excel中同步过来的--------------没有增加自增id，该表原来有id。
+		hardware_test_script		硬件测试自动化工具脚本		数据库缺少自增id  表数据是从excel中同步过来的--------------没有增加自增id，该表原来有id。
+		hardware_test_tool			硬件测试器材建库			数据库缺少自增id  表数据是从excel中同步过来的--------------没有增加自增id，该表原来有id。
+		hcmminfo_b_list				HCMM-B板信息表				数据库有自增id  表数据是从sqlserver中同步过来的
+		hcmminfo_r_list				HCMM-R板信息表				数据库有自增id  没有用到这个表？-------------暂时没用到
+		hcmm_summary				单板得分表
+同	软	idmsinfo_list				问题单备份表				数据库缺少自增id  表数据是后续会写接口同步过来的	Summery DefectUrl这两个字段类型由text改成varchar（1000）--------------没有增加自增id   release字段改成release1.这个是关键字。
+	软	idm_employee				软件开发问题单得分表		数据库缺少自增id------------------------------------------------------------在原来的表中加一个字段：seconddptcode。不然，软件维护算分存储比较麻烦
+		idm_hardware				问题单硬件得分表			数据库缺少自增id
+同	软	isoft_contribution_list		项目人员贡献度				数据库缺少自增id  表数据是从sqlserver中同步过来的   projectId字段类型由text改成varchar(200)
+同	软	isoft_project_cloud_list	项目信息表					数据库缺少自增id  表数据是从mysql中同步过来的
+同	软	isoft_project_list			项目信息表					数据库缺少自增id  表数据是从sqlserver中同步过来的   projectId Url 字段类型由text改成varchar(200)   varchar(1000)
+		isoft_project_new_list									数据库缺少自增id  没有用到这个表？-------------暂时没用到。备份用的表
+同	软	isoft_workschedule			工作日历表					数据库缺少自增id
+		limsinfo_list				LIMS测试信息表				数据库有自增id  表数据是从sqlserver中同步过来的		ProductType ConfigNum  ExpType字段类型由text改成varchar(200)  
+		lims_summary				专业实验汇总表				数据库缺少自增id
+		login_summary				系统登陆统计表
+	软	notice_list					系统通知表					notice字段类型由text改成varchar（1000）    
+同	软	patentinfo_list				专利信息表					数据库有自增id  表数据是从excel中同步过来的   patentName字段类型由text改成varchar(200)   
+同	软	pdminfo_list				PDM信息表					数据库有自增id  表数据是从oracle中同步过来的
+	软	platform_summary			平台贡献得分表				数据库缺少自增id
+	软	project_su					项目数据汇总表				数据库缺少自增id
+	软	project_summary				项目得分汇总表				数据库缺少自增id	
+同	软	qmsinfo_list				生产质量问题QMS信息表		数据库有自增id  表数据是从mysql中同步过来的
+	软	quarter_score				员工季度总得分表			数据库缺少自增id	
+		reviewinfo_bak_list			评审信息备份表				数据库自增id设置的有问题， 没有用到这个表？-------------暂时没用到。备份用的表
+同	软	reviewinfo_cloud_list		云产品评审信息表			代码中用的时这个表review_cloud_list，和数据库对不上？这个表怎么来的？---------------用的是reviewinfo_cloud_list这个表，wucan后来改了
+同	软	reviewinfo_list				评审信息表					数据库自增id设置的有问题   表数据是从mysql中同步过来的
+	软	review_summary				评审得分统计表				数据库缺少自增id------------------------------------------------------------在原来的表中加一个字段：domainid。不然，软件评审算分存储比较麻烦
+		safetyinfo_list				安规认证信息表				数据库缺少自增id  表数据是从oracle中同步过来的		CERTIFY_MODEL CERTIFY_KIND  CERTIFY_TYPE 字段类型由text改成varchar(1000)    
+release字段改成release1.这个是关键字。
+		safety_summary				认证测试汇总表				数据库缺少自增id
+同	软	sharedocinfo_list			共享技术信息表				数据库有自增id  这个表怎么来的？		DocumentSubType字段类型由text改成varchar（2000）    -------------xml同步过来的
+同	软	specinfo_list				规范表						数据库有自增id  表数据是从oracle中同步过来的    GFMC GFZYRY GFBZSJ 字段类型由text改成varchar（200） varchar（200）  varchar（2000） 
+	软	svn_list												数据库缺少自增id  表数据是操作svn的日志提取过来的 
+		white_list					白名单						数据库缺少自增id  没有用到这个表？	-------------暂时没用到
+同	软	ynfxinfo_list				疑难复现电子流信息表		数据库有自增id  表数据是从oracle中同步过来的
+
+
+
+1.建议用decimal类型代替float类型，前者更加精确，后者相加减可能会产生比较小的误差。我看现在的数据库中分数字段有的是用decimal有的是用float，没有形成统一标准。代码中可以用decimal转成double进行运算操作。
+
+2.对同步过来的表加上同步标识和同步时间的字段即可。sync_status     sync_time
+
+3.需要增加的表：操作日志表   邮件记录表   判断员工职类常量表  isoft_check状态表。
+
+
+增加自增主键id
+alter table design_hardware_score add id INT;
+alter table design_hardware_score change id id int not null auto_increment primary key;
+
+
+alter table feedback add TIME1 DATETIME
+UPDATE reviewinfo_list SET PSPG_TIME='2021-05-06 00:00:00'
+
+UPDATE analyzeinfo_list SET trouble='2021-05-06，重置，到时候同步数据的时候截取2000个字符存储'
+
+
+注：同步数据的时候，注意把原来的text类型的字段截取现在数据库指定的varchar字符长度然后存储。
+
+--------------------------------------------------------------------------------------------
+idmsinfo_list中新加字段：ProjectID   
+isoft_project_list中新加字段：ProPhase  项目阶段   ProQuaterWork  项目当季工作量
+
+创建表3， 同时拷贝表1的数据和结构到表3
+CREATE TABLE table3 SELECT * FROM table1
+
+最终表加上的列：
+ALTER TABLE ynfxinfo_list ADD COLUMN `sync_status` VARCHAR(50) NULL DEFAULT NULL COMMENT '同步状态标识';
+ALTER TABLE ynfxinfo_list ADD COLUMN `sync_time` DATETIME DEFAULT NULL COMMENT '同步时间标识';
+
+
+
+20210517：
+litongxin反馈：
+safetyinfo_list  release字段这个是关键字。存储有问题。
+已改成release1存储。
+
+reviewinfo_list这个表里面的字段类型都是非空的，PSSH_NAME 、PSSH_TIME 、PSPG_NAME 、PSPG_TIME 这几个都是环节的签名和签名时间。数据集成过来可以为空值
+已改这几个字段，改成可以为空值存储。
+
+chenyuexiu反馈：
+experienceinfo_list  中字段ChineseName 的长度不够用，之前是20
+已改成50。
+
+20210518:
+为idmsinfo_list加上了2个索引，提高查询效率
+ALTER TABLE `idmsinfo_list`
+	ADD INDEX `Index 3` (`DefectModifiedTime`),
+	ADD INDEX `Index 4` (`CurrentNode`);
+	
+litongxin反馈：
+1、
+表名：analyzeinfo_list
+字段：trouble、fix_difficulty、fillname_19、filltime_19、fillname_7、filltime_7
+说明：原表数据中所有字段都是不是非空，这些事暂时有遇到的字段
+2、
+         表名：isoft_workschedule
+         说明：没有sync_status  和  sync_time  字段
+3、
+       表名：pdminfo_list
+       字段：H3PCBLEVELNUM（这个暂时没改，数据库存的是int）、PDT
+       说明：暂时遇到的字段；没有sync_status  和  sync_time  字段
+4、
+         表名：safetyinfo_list
+         字段：SigningTime72、SigningTime71，SigningTime73，SigningTime74
+说明：原表数据中所有字段都是不是非空，这些事暂时有遇到的字段
+5、
+         表名：specinfo_list
+         字段：FBTIME、DEPT1、GFZYRY、
+说明：原表数据中所有字段都是不是非空，这些事暂时有遇到的字段
+6、
+         表名：ynfxinfo_list
+         字段：TOTALTIMES、USERID_06B、ENDTIME_06B
+说明：原表数据中所有字段都是不是非空，这些事暂时有遇到的字段
+已改这几个字段，改成可以为空值存储。
+
+isoft_project_cloud_list ，这个表中这个字段的长度你可以先改大点嘛   no_accepted_code 
+已从10改成了50
+
+1、	开发测试云
+         表名：isoft_project_cloud_list
+         字段：di_density、progress_deviation
+         说明：progress_deviation字段长度需要修改成50
+2、	CBB接口
+表名：cbbinfo_list
+字段：nh3c_ReasonArchAgain、nh3c_KeyComp、nh3c_CbbLevel、ActualRelDate、H3SecondLevelDept……
+说明：只有revision、item_id非空，其他的都是可空
+3、	CMM
+表名：reviewinfo_list
+字段：account、
+4、	HCMM(待确认)
+表名：hcmminfo_r_list   、hcmminfo_b_list
+         说明：没有sync_status  和  sync_time  字段；原视图定义的类型都是可以为空，因为字段较多，建议都修改成可以为空
+1.2.3已改，4待确认，这个是硬件开发的呀---也改下。---这两个表加字段我这边改，为空的操作litongxin那边操作。
+
+
+20210519：
+chenyuexiu反馈：
+ALTER TABLE `kcmsdbts`.`patentinfo_list` 
+CHANGE COLUMN `dptname` `dptname` VARCHAR(50) NULL COMMENT '所属业务部门' ,
+CHANGE COLUMN `applicant` `applicant` VARCHAR(50) NULL COMMENT '申请人' ; 
+改成允许为null
+
+litongxin反馈：
+表名：safetyinfo_list
+说明：sync_status  和  sync_time  字段 --------已加字段。
+
+20210520：
+为department_list 加上了1个索引，提高查询效率
+ALTER TABLE `department_list` ADD INDEX `Index 2` (`subdptcode`);
+增加新的表：project_quarter_work_list当季当量数据表
+litongxin反馈：
+limsinfo_list   增加同步字段-----已增加
+
+chenyuexiu反馈：
+patentinfo_list 表中：applyDate  patentName  patentType thirddptname   改成了允许为null
+
+litongxin反馈：
+反馈了很多，见文档。
+
+20210521：
+
+
+20210524：
+修改表的引擎为innodb，已改的表：add_score  add_score_audit
+ALTER TABLE add_score ENGINE=InnoDB; ------------------------------所有的表都要改
+
+
+
+20210525：
+软件开发isoftV模型项目汇算涉及到的新增和修改的表：
+新贡献度视图dbo.V_impl_Contribution  不加，用之前的即可
+修改表：
+isoft_project_list 表中加字段  CloseTime   ProjectSerialNum
+ALTER TABLE `isoft_project_list` ADD COLUMN `CloseTime` DATETIME NULL DEFAULT NULL COMMENT '实际关闭时间（完结项目计算）' AFTER `EndTime`;
+ALTER TABLE `isoft_project_list` ADD COLUMN `ProjectSerialNum` VARCHAR(200) NULL DEFAULT NULL COMMENT '项目流水号（与IDMS对应）' AFTER `TC`;
+	
+idmsinfo_list 表加字段  ProjectSerialNum  isNew  UpdateDate
+ALTER TABLE `idmsinfo_list` ADD COLUMN `ProjectSerialNum` VARCHAR(200) NULL DEFAULT NULL COMMENT '项目流水号（与Isoft对应）' AFTER `IdmsType`;
+ALTER TABLE `idmsinfo_list` ADD COLUMN `isNew` VARCHAR(5) NULL DEFAULT NULL COMMENT '是否为新单' AFTER `ProjectSerialNum`;
+ALTER TABLE `idmsinfo_list` ADD COLUMN `UpdateDate` DATETIME NULL DEFAULT NULL COMMENT '更新日期' AFTER `isNew`;
+
+project_summary  加字段  countDate
+ALTER TABLE `project_summary` ADD COLUMN `countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期' AFTER `type`;
+
+新建表：  
+project_acceptance_problems_list项目验收问题单视图表
+project_summary_v  v模型的汇算中间表，到时候把Sa_count字段值赋值给project_summary的Sa_count字段,还是用之前的这个表计算
+project_problems_di 项目总问题单DI汇算表
+
+20210526：
+先在软件开发的配置表dptconfig_list中自己添加配置下这几个字段。
+项目工作量系数          v_pro_work
+系数A=系统测试DI系数	v_systestDI_a
+员工ST提单DI系数		v_subQuestDI
+员工ST解单DI系数		v_solveQuestDI
+系数B=验收测试解单DI系数 v_checktestDI_b
+
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_pro_work` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '项目工作量系数' AFTER `prj_Auditprefix`;
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_systestDI_a` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '系统测试DI系数A' AFTER `v_pro_work`;
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_subQuestDI` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '员工ST提单DI系数' AFTER `v_systestDI_a`;
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_solveQuestDI` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '员工ST解单DI系数' AFTER `v_subQuestDI`;
+ALTER TABLE `dptconfig_list` ADD COLUMN `v_checktestDI_b` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '验收测试解单DI系数B' AFTER `v_solveQuestDI`;
+先给定初始值为0.1，后续在调整。
+
+
+
+20210527：
+总览页面慢，加了索引
+ALTER TABLE `employee_list`  DROP INDEX `account_2`,ADD INDEX `account_2` (`seconddptcode`),ADD INDEX `Index 4` (`postType`);
+当季得分页面慢，加索引
+ALTER TABLE `project_summary` ADD INDEX `Index 2` (`account`),ADD INDEX `Index 3` (`quarter`);
+ALTER TABLE `idm_employee`ADD INDEX `Index 2` (`account`),ADD INDEX `Index 3` (`quarter`);
+ALTER TABLE `review_summary` ADD INDEX `Index 2` (`account`),ADD INDEX `Index 3` (`quarter`);
+ALTER TABLE `add_score` ADD INDEX `Index 2` (`quarter`);
+ALTER TABLE `platform_summary` ADD INDEX `Index 3` (`quarter`);
+
+
+	
+20210528：
+公告栏功能增加需求：
+增加2个接口，一张表 ：notice_read_record 各个员工最新公告阅读记录表	
+
+
+
+20210529：
+
+project_problems_di 项目总问题单DI汇算表  新加一个字段：'验收测试总DI'
+ALTER TABLE `project_problems_di`  ADD COLUMN `ProCheckDI` INT NOT NULL DEFAULT '0' COMMENT '项目系统验证测试总DI' AFTER `ProQuestDI`;
+
+project_summary 表新加了2个字段
+ALTER TABLE `project_summary`
+ADD COLUMN `projectType` VARCHAR(20) NULL DEFAULT NULL COMMENT 'V模型项目还是普通项目' AFTER `type`,
+ADD COLUMN `accountWork` DECIMAL(10,2) NULL DEFAULT NULL COMMENT '员工当季工作量：当季总工作量(项目当量表)*当季员工贡献度百分比' AFTER `projectType`;
+
+新建了project_su_v代替了之前的project_summary_v表
+
+
+
+
+
+
+
+维护得分定时汇算---weihu方法-----已测试。-----涉及到的汇算表idm_employee加一个字段：汇算日期：countDate
+ALTER TABLE `idm_employee` ADD COLUMN `countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期' AFTER `normalLocationNum`;
+把历史数据删除了：
+
+评审页面中的展示详情的接口慢，评审得分详情列表中分数保留2位小数。
+reviewinfo_list  评审信息表
+ALTER TABLE `reviewinfo_list` ADD INDEX `Index 2` (`account`), ADD INDEX `Index 3` (`finishdate`);
+----------已处理
+
+reviewinfo_middle_list  litongxin说要建的中间表  和reviewinfo_list表结构一样-----已加
+
+20210602:
+评审得分定时汇算---audit方法-----已测试。-----涉及到的汇算表review_summary加一个字段：汇算日期：countDate
+ALTER TABLE `review_summary` ADD COLUMN `countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期' AFTER `domainid`;
+
+
+
+操作日志表:
+CREATE TABLE `operation_log` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`model_code` VARCHAR(200) NULL DEFAULT NULL,
+	`model_name` VARCHAR(200) NULL DEFAULT NULL,
+	`summary` VARCHAR(200) NULL DEFAULT NULL,
+	`content` TEXT NULL,
+	`user_id` VARCHAR(50) NULL DEFAULT NULL,
+	`ip` VARCHAR(50) NULL DEFAULT NULL,
+	`log_time` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='操作日志'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+邮件记录表
+CREATE TABLE `mail_info` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`send_to` VARCHAR(100) NULL DEFAULT NULL COMMENT '发送目标地址',
+	`cc_to` VARCHAR(100) NULL DEFAULT NULL COMMENT '抄送目标地址',
+	`subject` VARCHAR(500) NULL DEFAULT NULL COMMENT '邮件主题',
+	`content` VARCHAR(500) NULL COMMENT '邮件内容',
+	`creator` VARCHAR(50) NULL DEFAULT '邮件创建人',
+	`create_time` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COMMENT='邮件记录表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+员工职类常量表 
+CREATE TABLE `post_type_constant` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`post_name1` VARCHAR(20) NULL DEFAULT NULL COMMENT '职类名称1',
+	`post_name2` VARCHAR(20) NULL DEFAULT NULL COMMENT '职类名称2',
+	`post_name3` VARCHAR(20) NULL DEFAULT NULL COMMENT '职类名称3',
+	`post_type` VARCHAR(20) NULL DEFAULT NULL COMMENT '职类类型',
+	`delete_flag` INT NULL DEFAULT NULL COMMENT '删除标识，0无效 1有效',
+	`creator` VARCHAR(10) NULL DEFAULT NULL COMMENT '创建人工号',
+	`create_time` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+	`modifier` VARCHAR(10) NULL DEFAULT NULL COMMENT '修改人工号',
+	`modifi_time` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='员工职类常量表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+isoft_check状态常量表
+CREATE TABLE `isoft_check_type_constant` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`pro_type` VARCHAR(20) NULL DEFAULT NULL ,
+	`pro_type_cn` VARCHAR(20) NULL DEFAULT NULL ,
+	`pro_state` VARCHAR(20) NULL DEFAULT NULL ,
+	`pro_state_cn` VARCHAR(20) NULL DEFAULT NULL ,
+	`delete_flag` INT NULL DEFAULT NULL COMMENT '删除标识，0无效 1有效',
+	`creator` VARCHAR(10) NULL DEFAULT NULL COMMENT '创建人工号',
+	`create_time` DATETIME NULL DEFAULT NULL COMMENT '创建时间',
+	`modifier` VARCHAR(10) NULL DEFAULT NULL COMMENT '修改人工号',
+	`modifi_time` DATETIME NULL DEFAULT NULL COMMENT '修改时间',
+	PRIMARY KEY (`id`)
+)
+COMMENT='isoft_check状态常量表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+project_quarter_work_list当季当量数据表
+CREATE TABLE `project_quarter_work_list` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`project_id` VARCHAR(36) NOT NULL COMMENT '项目名称编号',
+	`quarter_str` VARCHAR(50) NULL DEFAULT NULL COMMENT '季度',
+	`pro_quar_work` DECIMAL(38,1) NULL DEFAULT NULL COMMENT '当季工作量（当量）',
+	`sync_status` VARCHAR(50) NULL DEFAULT NULL COMMENT '同步状态标识',
+	`sync_time` DATETIME DEFAULT NULL COMMENT '同步时间标识',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_quarter_work_list当季当量数据表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+project_acceptance_problems_list项目验收问题单视图表
+CREATE TABLE `project_acceptance_problems_list` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`project_id` VARCHAR(200) NOT NULL COMMENT '项目编号id',
+	`defect_no` VARCHAR(50) NULL DEFAULT NULL COMMENT '问题单号',
+	`sync_status` VARCHAR(50) NULL DEFAULT NULL COMMENT '同步状态标识',
+	`sync_time` DATETIME NULL DEFAULT NULL COMMENT '同步时间标识',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_acceptance_problems_list项目验收问题单视图表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+project_summary_V  v模型的汇算中间表（countDate使用varchar类型好汇算）
+CREATE TABLE `project_summary_v` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`projectId` VARCHAR(300) NOT NULL COMMENT '项目ID',
+	`projectName` VARCHAR(300) NOT NULL COMMENT '项目名称',
+	`quarter` VARCHAR(20) NOT NULL COMMENT '季度',
+	`account` VARCHAR(50) NOT NULL COMMENT '人员',
+	`ProTotalWorkd` DECIMAL(38,1) NOT NULL DEFAULT '0.0' COMMENT '项目截至当日的总工作量',
+	`ProScored` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '项目截至当日的得分Bx',
+	`ContributeValued` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '项目截至当日的员工的贡献度百分比Rx',
+	`TotalScored` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '个人Cx截至当日实际总得分',
+	`ContributeValue` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '个人当季贡献度百分比',
+	`Sa_count` DECIMAL(10,2) NOT NULL DEFAULT '0.00' COMMENT '员工Cx当季总得分Sdx',
+	`ProQuarWork` DECIMAL(38,1) NOT NULL DEFAULT '0.0' COMMENT '个人当季工作量（当量）',
+	`countDate` VARCHAR(20) NULL DEFAULT NULL COMMENT '汇算日期',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_summary_V  v模型的汇算中间表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+project_problems_di 项目总问题单DI汇算表
+CREATE TABLE `project_problems_di` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`ProjectSerialNum` VARCHAR(200) NOT NULL COMMENT '项目流水号',
+	`projectId` VARCHAR(300) NOT NULL COMMENT '项目ID',
+	`projectName` VARCHAR(300) NOT NULL COMMENT '项目名称',
+	`account` VARCHAR(50) NOT NULL COMMENT '员工工号',
+	`SubQuestDI` INT NOT NULL DEFAULT '0' COMMENT '个人提单总DI',
+	`SolveQuestDI` INT NOT NULL DEFAULT '0' COMMENT '个人解单总DI',
+	`CheckSolveQDI` INT NOT NULL DEFAULT '0' COMMENT '个人验收测试解单总DI',
+	`ProQuestDI` INT NOT NULL DEFAULT '0' COMMENT '项目系统测试总DI',
+	`countDate` DATETIME NULL DEFAULT NULL COMMENT '汇算日期',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_problems_di 项目总问题单DI汇算表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+notice_read_record 各个员工最新公告阅读记录表
+CREATE TABLE `notice_read_record` (
+	`id` INT NOT NULL AUTO_INCREMENT COMMENT '主键 自增id',
+	`employee_id` VARCHAR(10) NULL DEFAULT NULL  COMMENT '员工工号',
+	`notice_id` VARCHAR(10) NULL DEFAULT NULL COMMENT '公告id',
+	`is_read` int NULL DEFAULT NULL COMMENT '公告是否阅读（0未阅读，1已阅读）',
+	`readdate` DATETIME NULL DEFAULT NULL COMMENT '阅读日期',
+	PRIMARY KEY (`id`)
+)
+COMMENT='notice_read_record 各个员工最新公告阅读记录表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+project_su_v  v模型的汇算中间表(代替这个表project_summary_v)
+CREATE TABLE `project_su_v` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`projectName` VARCHAR(1000) NULL DEFAULT NULL  COMMENT '项目名称',
+	`projectId` VARCHAR(1000) NULL DEFAULT NULL  COMMENT '项目ID',
+	`Sa` DECIMAL(20,2) NULL DEFAULT NULL COMMENT '当季得分',
+	`quarter` VARCHAR(10) NULL DEFAULT NULL COMMENT '季度',
+	`seconddptcode` VARCHAR(50) NULL DEFAULT NULL COMMENT '二级部门编号',
+	`quarterWork` DECIMAL(20,2) NULL DEFAULT NULL COMMENT '当季度工作量',
+	PRIMARY KEY (`id`)
+)
+COMMENT='project_su_v  v模型的汇算中间表'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+
+
+
+
+
+

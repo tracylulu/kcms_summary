@@ -1,0 +1,354 @@
+普通员工职位返回参数列表：
+{
+  "status": 0,
+  "success": true,
+  "message": "查询成功",
+  "pageNum": 0,
+  "total": 15,
+  "tableHeadData": null,
+  "data": {
+    "level4": "60043741",
+    "currentQuarter": "2021Q2",
+    "postType": "软件开发",
+    "city": [
+      "平均",
+      "所有",
+      "杭州",
+      "上海",
+      "北京",
+      "合肥",
+      "成都",
+      "郑州"
+    ],
+    "errorInfo": "",
+    "type": 1,
+    "optionLevel3": [],
+    "optionLevel2": [],
+    "careerLevel": [
+      "软件开发",
+      "硬件开发",
+      "软件测试",
+      "硬件测试"
+    ],
+    "name": "胡佳佳",
+    "id": "11640",
+    "level3": "50041351",
+    "level2": "50041348",
+    "quarter": [
+      "2020Q1",
+      "2020Q2",
+      "2020Q3",
+      "2020Q4",
+      "2021Q1",
+      "2021Q2"
+    ],
+    "status": true
+  }
+}
+
+
+
+主管职位返回参数列表：
+{
+  "status": 0,
+  "success": true,
+  "message": "查询成功",
+  "pageNum": 0,
+  "total": 16,
+  "tableHeadData": null,
+  "data": {
+    "level4": "",
+    "currentQuarter": "2021Q2",
+    "postType": "其他",
+    "level": "3",
+    "city": [
+      "平均",
+      "所有",
+      "杭州",
+      "上海",
+      "北京",
+      "合肥",
+      "成都",
+      "郑州"
+    ],
+    "errorInfo": "",
+    "type": 2,
+    "optionLevel3": [
+      {
+        "level3": [
+          {
+            "dptname": "测试中心软件鉴定部",
+            "dptcode": "50041373"
+          },
+          {
+            "dptname": "测试中心成都分部",
+            "dptcode": "50043533"
+          },
+          {
+            "dptname": "测试中心硬件鉴定部",
+            "dptcode": "50041375"
+          },
+          {
+            "dptname": "测试中心系统部",
+            "dptcode": "50041372"
+          },
+          {
+            "dptname": "测试中心解决方案鉴定部",
+            "dptcode": "50043439"
+          },
+          {
+            "dptname": "测试中心杭州分部",
+            "dptcode": "50041374"
+          },
+          {
+            "dptname": "测试中心海外支持部",
+            "dptcode": "50043814"
+          }
+        ],
+        "level2": "50041371"
+      }
+    ],
+    "optionLevel2": [
+      {
+        "dptname": "测试中心",
+        "dptcode": "50041371"
+      }
+    ],
+    "careerLevel": [
+      "软件开发",
+      "硬件开发",
+      "软件测试",
+      "硬件测试"
+    ],
+    "name": "陈翀",
+    "id": "01917",
+    "level3": "50041373",
+    "level2": "50041371",
+    "quarter": [
+      "2020Q1",
+      "2020Q2",
+      "2020Q3",
+      "2020Q4",
+      "2021Q1",
+      "2021Q2"
+    ],
+    "status": true
+  }
+}
+
+管理员职位返回参数列表：
+{
+  "status": 0,
+  "success": true,
+  "message": "查询成功",
+  "pageNum": 0,
+  "total": 15,
+  "tableHeadData": null,
+  "data": {
+    "level4": "50043689",
+    "currentQuarter": "2021Q2",
+    "postType": "软件开发",
+    "city": [
+      "平均",
+      "所有",
+      "杭州",
+      "上海",
+      "北京",
+      "合肥",
+      "成都",
+      "郑州"
+    ],
+    "errorInfo": "",
+    "type": 3,
+    "optionLevel3": [
+      {
+        "level3": [
+          {
+            "dptname": "数据中心交换机产品开发部",
+            "dptcode": "50042494"
+          },
+          {
+            "dptname": "数据中心互联交换机产品开发部",
+            "dptcode": "50043678"
+          },
+          {
+            "dptname": "白盒交换机产品开发管理部",
+            "dptcode": "50043669"
+          },
+          {
+            "dptname": "园区核心交换机产品开发部",
+            "dptcode": "50043688"
+          },
+          {
+            "dptname": "园区交换机产品开发部",
+            "dptcode": "50042495"
+          },
+          {
+            "dptname": "数据中心网络交换机产品开发部",
+            "dptcode": "50043670"
+          },
+          {
+            "dptname": "交换机产品管理部",
+            "dptcode": "50042496"
+          },
+          {
+            "dptname": "交换机产品拓展部",
+            "dptcode": "50042498"
+          },
+          {
+            "dptname": "交换机产品系统部",
+            "dptcode": "50042497"
+          },
+          {
+            "dptname": "园区接入交换机产品开发部",
+            "dptcode": "50043681"
+          }
+        ],
+        "level2": "50042493"
+      }
+    ],
+    "optionLevel2": [
+      {
+        "dptname": "交换机产品线",
+        "dptcode": "50042493"
+      }
+    ],
+    "careerLevel": [
+      "软件开发",
+      "硬件开发",
+      "软件测试",
+      "硬件测试"
+    ],
+    "name": "石亮",
+    "id": "00745",
+    "level3": "50043688",
+    "level2": "50042493",
+    "quarter": [
+      "2020Q1",
+      "2020Q2",
+      "2020Q3",
+      "2020Q4",
+      "2021Q1",
+      "2021Q2"
+    ],
+    "status": true
+  }
+}
+
+超级管理员职位返回参数列表：
+
+{
+  "status": 0,
+  "success": true,
+  "message": "查询成功",
+  "pageNum": 0,
+  "total": 16,
+  "tableHeadData": null,
+  "data": {
+    "level4": "",
+    "admin_level2": "50041348",
+    "currentQuarter": "2021Q2",
+    "postType": "其他",
+    "city": [
+      "平均",
+      "所有",
+      "杭州",
+      "上海",
+      "北京",
+      "合肥",
+      "成都",
+      "郑州"
+    ],
+    "errorInfo": "",
+    "type": 4,
+    "optionLevel3": [
+      {
+        "level3": [
+          {
+            "dptname": "智能终端研发部",
+            "dptcode": "50041227"
+          },
+          {
+            "dptname": "智能终端营销部",
+            "dptcode": "50041225"
+          },
+          {
+            "dptname": "智能终端技术服务部",
+            "dptcode": "50041231"
+          },
+          {
+            "dptname": "智能终端供应链管理部",
+            "dptcode": "50041229"
+          },
+          {
+            "dptname": "智能终端运作支持部",
+            "dptcode": "50043753"
+          }
+        ],
+        "level2": "50041224"
+      },
+      {
+        "level3": [
+          {
+            "dptname": "智能终端研发部",
+            "dptcode": "50041227"
+          },
+          {
+            "dptname": "智能终端营销部",
+            "dptcode": "50041225"
+          },
+          {
+            "dptname": "智能终端技术服务部",
+            "dptcode": "50041231"
+          },
+          {
+            "dptname": "智能终端供应链管理部",
+            "dptcode": "50041229"
+          },
+          {
+            "dptname": "智能终端运作支持部",
+            "dptcode": "50043753"
+          }
+        ],
+        "level2": "50041224"
+      }
+      后面的省略，不然太多了
+		
+    ],
+    "optionLevel2": [
+      {
+        "name": "研究开发部-硬件开发部",
+        "code": "50041407",
+        "dptname": "研究开发部"
+      },
+      {
+        "name": "研究开发部-总体技术管理部",
+        "code": "50041428",
+        "dptname": "研究开发部"
+      }
+     后面的省略，不然太多了
+    ],
+    "careerLevel": [
+      "软件开发",
+      "硬件开发",
+      "软件测试",
+      "硬件测试"
+    ],
+    "name": "马现朋",
+    "id": "09212",
+    "level3": "50040641",
+    "level2": "50040637",
+    "quarter": [
+      "2020Q1",
+      "2020Q2",
+      "2020Q3",
+      "2020Q4",
+      "2021Q1",
+      "2021Q2"
+    ],
+    "status": true
+  }
+}
+
+
+
